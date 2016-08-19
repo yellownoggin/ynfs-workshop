@@ -1,0 +1,238 @@
+/*1. break point got set-up
+    - using the material break points
+    - media queries
+        - site with
+        -  gutters: margin padding container;
+        - internal rows:
+            -
+        ;
+2. very basic layout  finished image provided
+    - scrunched up wireframe
+    -  using angular material css(normalize like+ base)
+    - layouts.css/  angular material layout  html
+3. start to fill in with basic element mocks
+    - header
+        - wireframe mobile first
+        - internal layout specifics
+            - up to 600
+            - right side: show right side >960 (logo icon)
+            - left side: make row < 960
+                - make flex 100
+        - internal wireframe
+            - left side
+                - img - img actual sice is the one specified in the html
+                p- site sologan
+                nav
+
+
+NOTES:
+- needed a background color to see if it's working
+- don't forget ngcloak (using on the container *for now)
+- p, img, h's, body (width, line-height, font-weight)
+    - should check the p layout when beginning - helps consistency with layout
+- padding-sides-8 may need adjusting(top right spurred this thought)
+    - another way to look wat it is that that is the gutter size for a md app
+- clear out the typographys
+- double check the h's - maybe not the color- check to see the standard md if there is one.
+- browsers - 16px seems the standard height
+    - am - site docs - html 62.4% font size
+    - and before I indicated font size  the defaulted as 16
+- need to understand whether and what to use for base css file - ie normalize, modernizer, typebase
+https://help.webflow.com/article/what-does-normalizecss-modernizrjs-do
+http://blog.teamtreehouse.com/setting-rather-than-resetting-default-stylingnor
+- material doesn't have it as a dependency
+- bootstrap does or has a modified version
+- the problem is it hijacks h's html line height
+- title - at abt 530 needs fixing.
+
+*/
+
+
+/*
+layout	flex	Sets default layout direction & flex unless overridden by another breakpoint.
+layout-xs	flex-xs	width < 600px
+layout-gt-xs	flex-gt-xs	width >= 600px
+layout-sm	flex-sm	600px <= width < 960px
+layout-gt-sm	flex-gt-sm	width >= 960px
+layout-md	flex-md	960px <= width < 1280px
+layout-gt-md	flex-gt-md	width >= 1280px
+layout-lg	flex-lg	1280px <= width < 1920px
+layout-gt-lg	flex-gt-lg	width >= 1920/b>px
+layout-xl	flex-xl	width >= 1920px*/
+
+.background-f6f6f6 {
+    background-color: #f6f6f6;
+}
+
+/*TODO:  this is not layout*/
+.logo-row {
+    margin-top: 70px;
+}
+.logo-row h1 {
+    font-size: 56px;
+    margin: 0;
+    text-shadow: 0px 1px 1px #000;
+    color: #282828;
+}
+.span-accent {
+    color:  rgb(255,171,64);
+}
+.icon-logo-right.material-icons {
+    font-size: 250px !important;
+    /*line-height: 75px;*/
+}
+
+md-icon.icon-logo-right {
+    height: 250px;
+    width: 250px;
+        text-shadow: 0px 1px 1px #000;
+    /*line-height: 75px;*/
+}
+.icon-logo.material-icons {
+    font-size: 75px !important;
+    /*line-height: 75px;*/
+}
+
+md-icon.icon-logo {
+    height: 75px;
+    width: 75px;
+    /*line-height: 75px;*/
+        text-shadow: 0px 1px 1px #000;
+
+}
+
+body {
+    line-height: 1.5;
+    font-weight: 300;
+    width: auto;
+    background: #fafafa;
+}
+p {
+    margin: 0 0 10px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+h2 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+/*end of typography*/
+
+.container {
+    padding: 0 15px;
+    margin: 0 auto;
+}
+header, footer, .main {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.logo {
+    margin-top: 70px;
+}
+.logo-icon {
+    display: block;
+}
+header p {
+    font-size: 30px;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+header nav {
+    margin-top: 10px;
+    /* adjusted from 20px
+     * img align vertical - may have been the issue
+     */
+    font-size: 20px;
+}
+nav button:first-child {
+    margin-left: 0px;
+}
+.nav-buttons-ynfs {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 16px;
+    /* adjusted from 20*/
+    padding: 1px 10px;
+    /*margin: 6px 8px;*/
+    line-height: 40px;
+    min-height: 40px;
+}
+.padding-sides-8 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+@media (max-width: 600px) {
+    .logo-row {
+        margin-top: 0px;
+    }
+    .logo-row h1 {
+        font-size: 48px;
+        line-height: 1;
+    }
+    md-icon.icon-logo {
+        margin-right: 10px;
+    }
+
+    .logo {
+        max-width: 100%;
+        margin-top: 0;
+    }
+    h2 {
+        margin-top: 20px;
+    }
+}
+@media (min-width: 600px) {
+    .site-width {
+        width: 750px;
+    }
+    header, footer, .main {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: -8px;
+        margin-left: -8px;
+        /*adjusted it to 8
+        to match layout padding of am
+        bootstrap seems to be used
+         it uses 15px for padding on col.
+        */
+    }
+}
+@media (min-width: 960px) {
+    .site-width {
+        width: 970px;
+    }
+    .container {
+        margin: 10px auto 20px;
+        padding: 0 15px;
+    }
+}
+@media (min-width: 1280px) {
+    .site-width {
+        width: 1170px;
+    }
+    .container {
+        margin: 10px auto 20px;
+        padding: 0 15px;
+    }
+}
