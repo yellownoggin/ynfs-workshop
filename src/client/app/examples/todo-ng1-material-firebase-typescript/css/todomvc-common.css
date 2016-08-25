@@ -1,0 +1,185 @@
+
+/**
+ * Mark all on top
+ * using directly typescript todomvc
+ */
+
+md-checkbox.markall {
+    margin-top: 29px;
+    padding-top: 0;
+}
+
+ .toggle-all {
+ 	position: absolute;
+ 	top: -55px;
+ 	left: -12px;
+ 	width: 60px;
+ 	height: 34px;
+ 	text-align: center;
+ 	border: none; /* Mobile Safari */
+ }
+
+ .toggle-all:before {
+ 	content: '❯';
+ 	font-size: 22px;
+ 	color: #e6e6e6;
+ 	padding: 10px 27px 10px 27px;
+ }
+
+ .toggle-all:checked:before {
+ 	color: #737373;
+ }
+/*/Mark all on top*/
+
+/**
+ * footer
+ * used angular.io inspired
+ */
+ul.filters  {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+        text-align: center;
+}
+ul.filters li {
+    display: inline;
+}
+
+ul.filters li a {
+    color: inherit;
+    /*margin: 3px;*/
+    padding: 3px 3px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+}
+
+.l-left {
+    float: left;
+}
+ul.filters li {
+    margin: 0;
+}
+
+/*button fix  clear completed*/
+.clear-completed:hover {
+    text-decoration: underline;
+}
+.clear-completed, html .clear-completed:active {
+    float: right;
+    position: relative;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+button.clear-completed {
+    outline: none;
+}
+button.clear-completed {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 100%;
+    vertical-align: baseline;
+    font-family: inherit;
+    font-weight: inherit;
+    color: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+/*ul.filters li a {
+	padding-left: 16px;
+	padding-right: 16px;
+	text-align: center;
+}*/
+/* /footer*/
+
+
+
+.dynamic-todo-list ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.dynamic-todo-list  {
+    color: #666;
+    }
+.dynamic-todo-list li {
+	position: relative;
+	font-size: 24px;
+	border-bottom: 1px solid #ededed;
+    padding: 15px 0px 0px 0px;
+}
+
+/*NOTE: changing the css on the mdelements opens up some issues in this case the animation inc. was off-center & went to modify the list element instead to get the padding*/
+
+
+/*.dynamic-todo-list li ._md-label {
+     white-space: pre-line;
+    word-break: break-all;
+    padding: 0px 60px 0px 15px;
+    margin-left: 45px;
+    display: block;
+    line-height: 1.2;
+    transition: color 0.4s;
+}
+.dynamic-todo-list li md-checkbox ._md-icon {
+    word-break: break-all;
+    margin-top: 12px;
+
+}*/
+
+.dynamic-todo-list li:first-child {
+    	border-top:1px solid #ededed;
+}
+.dynamic-todo-list li:last-child {
+	border-bottom: none;
+}
+.dynamic-todo-list li.completed span.todo-title-checkbox-label {
+    color: #d9d9d9;
+	text-decoration: line-through;
+}
+
+
+/**
+ * editing
+ */
+
+ /* editing input underneath view */
+ .dynamic-todo-list li .edit {
+ 	display: none;
+ }
+
+ .dynamic-todo-list li.editing .edit {
+	display: block;
+	width: 300px;
+	padding: 13px 17px 12px 17px;
+	margin: 0 0 0 43px;
+}
+
+ .dynamic-todo-list li.editing .view {
+	display: none;
+}
+
+
+
+
+/*.dynamic-todo-list li .toggle {
+	text-align: center;
+	width: 40px;
+	 auto, since non-WebKit browsers doesn't support input styling
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	border: none;  Mobile Safari
+	-webkit-appearance: none;
+	appearance: none;
+}*/

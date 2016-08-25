@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "listFiles": true
+    },
+    "exclude": [
+        "examples"
+    ],
+    "filesGlob": [
+        "*.ts",
+        "./typings/index.d.ts"
+    ],
+    "compileOnSave": true,
+    "files": [
+        "app.ts",
+        "./typings/index.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

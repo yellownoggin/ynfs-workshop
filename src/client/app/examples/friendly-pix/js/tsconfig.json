@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "listFiles": true
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "./*.ts",
+        "./typings/index.d.ts"
+    ],
+    "compileOnSave": true,
+    "files": [
+        "./auth.ts",
+        "./routing.ts",
+        "./typings/globals/firebase3/index.d.ts",
+        "./typings/globals/jquery/index.d.ts",
+        "./typings/index.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

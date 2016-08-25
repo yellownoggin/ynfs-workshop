@@ -1,0 +1,70 @@
+.footer {
+    color: #777;
+padding: 10px 0px;
+height: 25px;
+/*text-align: center;*/
+border-top: 1px solid #e6e6e6;
+}
+
+
+.md-button.footer-font-fix {
+    text-transform: none !important;
+    font-weight: 400 !important;
+}
+
+
+.select-all-checkbox-content {
+    margin: -20px 0 0;
+}
+
+.todo-input-section md-input-container {
+    margin-bottom: 0;
+}
+body, html {
+    height:  100vh;
+}
+.bg-fff {
+    background-color: #ffffff;
+}
+.site-width-960 {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.main-column {
+    min-width: 400px;
+    max-width: 550px;
+}
+.section-container {
+    background: #fff;
+    margin: 0px 0 40px 0;
+    /*position: relative;*/
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    padding: 24px 12px 12px;
+}
+.fill-width {
+    width: 100%;
+}
+/* centers the content in the page within the 50% main column*/
+
+.center-in-page {
+    text-align: center;
+}
+.bg-f4f4f4 {
+    background-color: #f4f4f4;
+}
+.todo-list-container {
+
+}
+
+/*h1.todoappheadline {
+    position: absolute;
+    top: -155px;
+    width: 100%;
+    font-size: 100px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(175, 47, 47, 0.15);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;*/

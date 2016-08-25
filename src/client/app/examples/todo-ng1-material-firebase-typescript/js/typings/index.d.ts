@@ -1,0 +1,5 @@
+/// <reference path="globals/angular-ui-router/index.d.ts" />
+/// <reference path="globals/angular/index.d.ts" />
+/// <reference path="globals/angularfire/index.d.ts" />
+/// <reference path="globals/firebase3/index.d.ts" />
+/// <reference path="globals/jquery/index.d.ts" />

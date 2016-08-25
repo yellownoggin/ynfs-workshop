@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ng1 TodoMvc with Firebase plus Typescript</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./node_modules/angular-material/angular-material.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./css/todomvc-common.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./css/main.css" media="screen" title="no title" charset="utf-8">
+    <style media="screen">
+        [ng-cloak:] {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body class="bg-f4f4f4" ng-app="todomvc" ng-controller="TodoController as vm" ng-cloak>
+
+    <header class="bg-fff md-whiteframe-z1">
+        <div class="site-width-960">
+            <div layout="row">
+                <h1>Todo Fire  1</h1>
+                <p class="md-subheadline">
+                    Todo app using angularjs1, angular material, typescript, firebase.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main layout="row" layout-align="center start">
+        <section class="main-column" layout="column" flex="grow">
+
+            <div class="todo-headline-container center-in-page">
+                <h1 class="md-display-2">Todos</h1>
+            </div>
+
+            <section class="section-container">
+                <!-- todo-list-container -->
+                <div class="todo-list-container md-headline" ng-cloak>
+
+                    <!-- Main todo input -->
+                    <div class="todo-input-section">
+                        <form ng-submit="vm.addTodo()">
+                            <md-input-container class="fill-width">
+                                <label>
+                                    What needs to be done?
+                                </label>
+                                <input type="text" ng-model="vm.newTodo" autofocus>
+                            </md-input-container>
+                        </form>
+                    </div>
+                    <!-- /main todo input -->
+
+                    <!-- todos list -->
+                    <div class="dynamic-todo-list">
+                        <div class="select-all-checkbox-content"  ng-show="vm.todos.length" ng-cloak>
+                            <md-checkbox ng-model="vm.allChecked" ng-click="vm.markAll(!vm.allChecked)" aria-label="Select All" class="select-all-checkbox md-subhead">
+                                <span ng-if="vm.allChecked">Un-</span>Select All
+                            </md-checkbox>
+                        </div>
+                        <ul>
+                            <li ng-class="{completed: todo.completed, editing: todo === vm.editedTodo}" ng-repeat="todo in vm.todos | filter: vm.statusFilter track by $index">
+                                <div class="view" layout="row" style="width:100%">
+                                    <div>
+                                        <md-checkbox ng-model="todo.completed" aria-label="Todo Items">
+                                        </md-checkbox>
+                                    </div>
+                                    <span ng-dblclick="vm.editTodo(todo)" flex="grow">
+                                        <span class="todo-title-checkbox-label">
+                                        {{todo.title}}
+                                        </span>
+                                    </span>
+                                    <div>
+                                        <md-button class="" ng-click="vm.removeTodo(todo)">x</md-button>
+                                    </div>
+                                </div>
+                                <form ng-submit="vm.doneEditing(todo)">
+                                    <md-input-container class="edit">
+                                        <input type="text" ng-model="todo.title" ng-blur="vm.doneEditing(todo)" todo-escape="vm.revertEdits(todo)">
+                                    </md-input-container>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /todos list -->
+
+                </div>
+                <!-- todo-list-container -->
+                <footer layout="row" class="footer md-body-1 footer-font-fix" ng-show="vm.todos.length" ng-cloak>
+                    <span flex="20"><strong>{{vm.remainingCount}}</strong>
+                        <ng-pluralize count="vm.remainingCount" when="{one: 'item left', other: 'items left'}"></ng-pluralize>
+                     </span>
+                    <ul class="filters" flex="60">
+                        <li>
+                            <a ng-class="{selected: location.path() === '/'}" href="#/">All</a>
+                        </li>
+                        <li>
+                            <a ng-class="{selected: location.path() === '/active'}" href="#/active">Active</a>
+                        </li>
+                        <li>
+                                    <a ng-class="{selected: location.path() === '/completed'}" href="#/completed">Completed</a>
+                        </li>
+                    </ul>
+                    <div class="" flex="20">
+                        <!-- <md-button class="footer-font-fix" ng-click="vm.clearDoneTodos()" ng-show="vm.doneCount">Clear completed</md-button> -->
+                        <button class="clear-completed" ng-click="vm.clearDoneTodos()" ng-show="vm.doneCount">Clear completed</button>
+                    </div>
+                </footer>
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- libraries -->
+    <script src="./node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
+    <script src="./node_modules/firebase/firebase.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-animate/angular-animate.js"></script>
+    <script src="./node_modules/angular-aria/angular-aria.js"></script>
+    <script src="./node_modules/angular-material/angular-material.js"></script>
+    <script src="./node_modules/angularfire/dist/angularfire.js"></script>
+
+
+    <!-- application -->
+    <script src="./js/app.js" charset="utf-8"></script>
+    <script src="./js/services/todoDataService.js" charset="utf-8"></script>
+    <script src="./js/controllers/todo.controller.js" charset="utf-8"></script>
+    <script src="./js/directives/todo-escape.directive.js" charset="utf-8"></script>
+    <script src="./js/directives/todo-focus.directive.js" charset="utf-8"></script>
+
+
+</body>
+
+</html>

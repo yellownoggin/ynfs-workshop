@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "listFiles": true
+    },
+    "filesGlob": [
+        "./boot.ts",
+        "../typings/index.d.ts"
+    ],
+    "compileOnSave": true,
+    "files": [
+        "./boot.ts",
+        "../typings/index.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "contact-manager-amf",
+  "homepage": "https://github.com/yellownoggin/ynfs-workshop",
+  "description": "contact manager angular material fundamentals plural site",
+  "main": "",
+  "authors": [
+    "Jamie Hennelly"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.0"
+  }
+}

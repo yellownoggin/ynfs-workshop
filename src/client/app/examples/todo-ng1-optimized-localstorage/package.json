@@ -1,0 +1,18 @@
+{
+  "name": "todo-ng1-optimized-localstorage",
+  "version": "1.0.0",
+  "description": "Todo application using Angularjs 1, Local storage,  Straight JS (no Types with Typscript - but using it as a compiler)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-aria": "^1.5.8",
+    "angular-material": "^1.1.0",
+    "todomvc-app-css": "^2.0.6"
+  }
+}

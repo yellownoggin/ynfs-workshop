@@ -1,0 +1,45 @@
+/* NG Todo LocalStorage */
+
+/**
+ * Colors
+ */
+
+ /* Backgrounds */
+ .bg-fff {
+     background-color: #ffffff;
+ }
+
+ .bg-f4f4f4 {
+     background-color: #f4f4f4;
+ }
+ .bg-f5f5f5 {
+     background-color: #f5f5f5;
+ }
+
+
+/**
+ * To be determined
+ */
+
+ .text-align-center {
+     text-align: center;
+ }
+
+
+/**
+ * Css for Update
+ */
+
+ul.todo-list {
+    list-style-type: none;
+}
+
+ul.todo-list li.editing .view {
+    display:none;
+}
+ul.todo-list li.editing .edit {
+    display:block;
+}
+ul.todo-list li .edit {
+    display:none;
+}

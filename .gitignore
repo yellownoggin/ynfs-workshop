@@ -1,5 +1,5 @@
-#bower_components
-#node_modules
+bower_components
+node_modules
 .idea
 .DS_STORE
 tmp
@@ -7,4 +7,7 @@ npm-debug.log
 build
 other
 report
-/src/client/typings
+/src/client/app/typings
+/src/client/app/examples/**/bower_components
+/src/client/app/examples/**/node_modules
+/src/client/app/examples/contact-manager-amf/app/bower_components
