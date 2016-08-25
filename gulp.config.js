@@ -19,6 +19,7 @@ module.exports = function() {
       // Aoll the js that i want to vet
       alljs: [
         '!./gulpfile.md.js',
+        '!' + clientApp + 'examples/**',
         './src/**/*.js',
         './src/**/**/*.js',
         './*.js'
@@ -27,19 +28,23 @@ module.exports = function() {
       client: client,
       // TODO:   referring to compiled css in temp folder per tutorial
       css: [
+        '!' + clientApp + 'examples/**',
         client + 'css/*.css',
         client + 'css/**/*.css'
       ],
       htmltemplates: [
+        '!' + clientApp + 'examples/**',
         clientApp + '**/**/*.html',
         clientApp + '**/*.html',
         clientApp + '*.html'
       ],
       images: [
+        '!' + clientApp + 'examples/**',
         client + 'images/*.*',
         client + 'images/**/*.*'
       ],
       js: [
+         '!' + clientApp + 'examples/**',
         '!' + clientApp + 'other/**',
         clientApp + '*.module.js',
         '!' + clientApp + '*.spec.js',
