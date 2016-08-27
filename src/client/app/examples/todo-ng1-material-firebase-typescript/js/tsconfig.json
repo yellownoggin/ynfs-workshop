@@ -15,7 +15,18 @@
     ],
     "compileOnSave": true,
     "files": [
-
+        "./app.ts",
+        "./controllers/todo.controller.ts",
+        "./directives/todo-escape.directive.ts",
+        "./directives/todo-focus.directive.ts",
+        "./models/todoitem.ts",
+        "./services/todoDataService.ts",
+        "./typings/globals/angular-ui-router/index.d.ts",
+        "./typings/globals/angular/index.d.ts",
+        "./typings/globals/angularfire/index.d.ts",
+        "./typings/globals/firebase3/index.d.ts",
+        "./typings/globals/jquery/index.d.ts",
+        "./typings/index.d.ts"
     ],
     "atom": {
         "rewriteTsconfig": true

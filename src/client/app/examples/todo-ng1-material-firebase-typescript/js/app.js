@@ -20,5 +20,13 @@ var todos;
             default: config.databaseURL,
             array: config.databaseURL + "/todos"
         });
+        var uiConfig = {
+            'signInSuccessUrl': '/',
+            'signInOptions': [
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID
+            ]
+        };
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        ui.start('#firebaseui-auth-container', uiConfig);
     });
 })(todos || (todos = {}));

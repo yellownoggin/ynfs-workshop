@@ -9,12 +9,13 @@
         "listFiles": true
     },
     "filesGlob": [
-        "./boot.ts",
+        "./*.ts",
         "../typings/index.d.ts"
     ],
     "compileOnSave": true,
     "files": [
-        "./boot.ts",
+        "./app.module.ts",
+        "./main.controller.ts",
         "../typings/index.d.ts"
     ],
     "atom": {

@@ -2,8 +2,6 @@ namespace app {
     'use strict';
 
 
-
-
     angular
         .module('ynfsworkshop', [
             'ngMaterial',
