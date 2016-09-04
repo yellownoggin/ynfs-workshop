@@ -8,14 +8,31 @@
         "moduleResolution": "node",
         "listFiles": true
     },
+    "exclude": [
+        "./typings/globals/*"
+    ],
     "filesGlob": [
         "./*.ts",
+        "./**/*.ts",
         "./typings/index.d.ts"
     ],
     "compileOnSave": true,
     "files": [
         "./app.config.ts",
         "./app.module.ts",
+        "./app.routes-nested.ts",
+        "./app.routes.ts",
+        "./authentication.controller.ts",
+        "./main.controller.ts",
+        "./upload.service.ts",
+        "./add-picture/add-picture.controller.ts",
+        "./authentication/authentication.config.ts",
+        "./authentication/firebase-authentication.service.ts",
+        "./profile/choose-file.directive.ts",
+        "./profile/profile.controller.ts",
+        "./services/firebase-demo.ts",
+        "./services/firebase-fp.service.ts",
+        "./splash/splash.controller.ts",
         "./typings/index.d.ts"
     ],
     "atom": {

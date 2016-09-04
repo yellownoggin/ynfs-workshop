@@ -14,38 +14,48 @@
 
     <!-- Firebase UI Auth -->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css" />
-
+    
     <!-- Styling -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,300">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth:700">
     <link rel="stylesheet" href="./css/main.css">
 
+    <style media="screen">
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+
 </head>
 
-<body layout="row">
-    <div layout="column" layout-fill>
-        <md-toolbar class="md-primary" md-scroll-shrink md-shrink-speed-factor="0.5">
+<body layout="row" ng-controller="MainController as mc" ng-cloak>
+<div layout="column" layout-fill>
+    <md-toolbar class="md-primary" layout="row">
+        <nav>
+            <ul class="main-nav-fp">
+                <li><a ui-sref="splash">Splash</a></li>
+                <li><a ui-sref="profile">Profile</a></li>
+                <!-- <li><a ui-sref="homeFeed">Home Feed</a></li>
+                <li><a ui-sref="allFeed">All Feed</a></li> -->
+            </ul>
+        </nav>
+        <span flex></span>
+        <div class="">
+            <md-button class="md-raise" ng-click="mc.signOut()">Sign out</md-button>
+            <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
 
-        </md-toolbar>
-        <!--Note: for scrollShrink to work, the toolbar must be a sibling of a md-content element, placed before it.-->
-        <md-content>
-            <h1>adding 2+2</h1> {{2 + 2}}
-
-        </md-content>
-    </div>
-    <!-- Splash screen -->
-    <!-- <section id="page-splash">
-        <h3 class="fp-logo"><i class="material-icons">photo</i> Friendly Pix</h3>
-        <div class="fp-caption">The friendliest way to share your pics</div>
-        <div class="fp-signed-out-only fp-initially-hidden">
-            <div id="firebaseui-auth-container" class="fp-signed-out-only fp-initially-hidden"></div>
-            <a class="fp-skip" href="/feed">skip sign in</a>
         </div>
-    </section> -->
+
+    </md-toolbar>
+    <!--Note: for scrollShrink to work, the toolbar must be a sibling of a md-content element, placed before it.-->
+    <md-content>
+
+        <!-- <div ui-view="view1"></div> -->
+        <ui-view ng-cloak></ui-view>
 
 
-
-
+    </md-content>
+</div>
 
 
 
@@ -72,7 +82,7 @@
     <!-- /firebase -->
 
     <!-- Firebase UI for Auth -->
-    <script src="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.js"></script> -->
 
     <!-- Currently located in app.config -->
 
@@ -100,6 +110,18 @@
     <!-- app.js -->
     <script src="./js/app.module.js" charset="utf-8"></script>
     <script src="./js/app.config.js" charset="utf-8"></script>
+    <script src="./js/app.routes.js" charset="utf-8"></script>
+    <script src="./js/splash/splash.controller.js"></script>
+    <script src="./js/main.controller.js"></script>
+    <script src="./js/authentication/authentication.config.js"></script>
+    <script src="./js/authentication/firebase-authentication.service.js"></script>
+    <script src="./js/profile/profile.controller.js"></script>
+    <script src="./js/services/firebase-fp.service.js"></script>
+    <script src="./js/profile/choose-file.directive.js"></script>
+    <script src="./js/upload.service.js"></script>
+    <script src="./js/add-picture/add-picture.controller.js"></script>
+    <!-- <script src="./js/authentication.controller.js"></script> -->
+
     <!-- /app.js -->
 </body>
 

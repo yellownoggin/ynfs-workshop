@@ -1,0 +1,31 @@
+<div layout="row" layout-align="center center" flex>
+    <div layout="column" flex="80">
+        <div layout="row" flex>
+            <div class="">
+                <img ng-src="{{pro.profilePic}}" alt="" />
+            </div>
+            <span flex="15"></span>
+            <div class="" flex>
+                <h1>{{pro.fullName}}</h1>
+
+                <!-- start of the pattern: name? -->
+                <choose-file layout="row">
+                    <!-- 1:  -->
+                    <input id="fileInput" type="file" class="ng-hide">
+                    <!-- 2 -->
+                    <md-input-container>
+                        <label>Select your file</label>
+                        <input type="text" ng-model="pro.fileName" disabled>
+                    </md-input-container>
+                    <!-- 3 -->
+                    <div class="">
+                        <md-button id="uploadButton" class="md-fab md-mini">
+                            <md-icon class="material-icons">attach_file</md-icon>
+                        </md-button>
+                    </div>
+                </choose-file>
+
+            </div>
+        </div>
+    </div>
+</div>

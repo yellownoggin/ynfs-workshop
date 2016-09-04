@@ -1,0 +1,29 @@
+<section id="page-add" class="mdl-grid fp-content">
+    <div layout="row" class="mdl-cell" layout-align="center start">
+        <div layout="column" class="fp-addcontainer">
+            <div>
+                <div class="">
+                    <!-- material icon goes here -->
+                </div>
+            </div>
+            <img id="newPictureContainer" ng-src="{{ap.imageValue}}" />
+            <!-- <p>image url</p>
+            <p>{{ap.imageValue}}</p> -->
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                <!-- supporting text elements go here -->
+                <form id="uploadPicForm" ng-submit="ap.uploadPic($event, pa.imageCaption)">
+                    <div>
+                        <md-input-container>
+                            <label>Image caption</label>
+                            <input type="text" ng-model="pa.imageCaption" autofocus>
+                        </md-input-container>
+                        <!-- <input type="text">
+                        <label for=""></label> -->
+                    </div>
+                    <br>
+                    <md-button type="submit" class="md-raised fp-upload">Upload</md-button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

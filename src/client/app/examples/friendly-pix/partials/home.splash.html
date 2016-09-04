@@ -1,0 +1,27 @@
+<div layout="row" layout-align="center center" flex>
+    <div class="splash-section" layout="column" flex="50">
+        <h1>Friendly Pix</h1>
+        <p>
+            The friendliest way to share your pics.
+        </p>
+
+        <div class="signed-out-only" layout="column">
+            <div class="firebaseui-auth-container">
+                <div class="" ng-show="!sc.isUser">
+                    <md-button class="md-raised" ng-click="sc.signInWithGoogle()">Sign In with Google</md-button>
+                </div>
+            </div>
+            <p>
+                <a class="fp-skip" ui-sref="profile({uid: sc.uid})">profile</a>
+            </p>
+            <p>
+                <a class="fp-skip" ui-sref="feed">skip sign in</a>
+            </p>
+            <p>
+                <!-- {{vm.isUser}} -->
+                {{sc.title}}
+            </p>
+        </div>
+
+    </div>
+</div>

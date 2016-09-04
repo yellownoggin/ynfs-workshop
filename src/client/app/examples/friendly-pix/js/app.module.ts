@@ -6,6 +6,7 @@ namespace friendlyPix {
             'ngAnimate',
             'ngAria',
             'ngMaterial',
-            'firebase'
+            'firebase',
+            'ui.router',
         ]);
 }

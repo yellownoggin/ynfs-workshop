@@ -6,6 +6,7 @@ var friendlyPix;
         'ngAnimate',
         'ngAria',
         'ngMaterial',
-        'firebase'
+        'firebase',
+        'ui.router',
     ]);
 })(friendlyPix || (friendlyPix = {}));

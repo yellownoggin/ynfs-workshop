@@ -1,0 +1,36 @@
+<div layout="column" layout-fill>
+    <md-toolbar class="md-primary" layout="row">
+        <nav>
+            <ul class="main-nav-fp">
+                <li><a ui-sref="splash">Splash</a></li>
+                <!-- <li><a ui-sref="homeFeed">Home Feed</a></li>
+                <li><a ui-sref="allFeed">All Feed</a></li> -->
+            </ul>
+        </nav>
+        <span flex></span>
+        <div class="">
+            <!-- <md-button class="md-raise" ng-click="vm.signOut()">Sign out</md-button> -->
+            <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
+
+        </div>
+
+    </md-toolbar>
+    <!--Note: for scrollShrink to work, the toolbar must be a sibling of a md-content element, placed before it.-->
+    <md-content>
+
+
+        <!-- <div ui-view="view1"></div> -->
+        <ui-view></ui-view>
+
+
+    </md-content>
+</div>
+<!-- Splash screen -->
+<!-- <section id="page-splash">
+    <h3 class="fp-logo"><i class="material-icons">photo</i> Friendly Pix</h3>
+    <div class="fp-caption">The friendliest way to share your pics</div>
+    <div class="fp-signed-out-only fp-initially-hidden">
+        <div id="firebaseui-auth-container" class="fp-signed-out-only fp-initially-hidden"></div>
+        <a class="fp-skip" href="/feed">skip sign in</a>
+    </div>
+</section> -->

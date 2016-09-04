@@ -9,15 +9,26 @@
         "listFiles": true
     },
     "exclude": [
-        "examples"
+        "./examples"
     ],
     "filesGlob": [
         "*.ts",
+        "./**/*.ts",
         "./typings/index.d.ts"
     ],
     "compileOnSave": true,
     "files": [
-        "app.ts",
+        "app.config.ts",
+        "app.module.ts",
+        "app.routes.ts",
+        "./app.config.ts",
+        "./app.module.ts",
+        "./app.routes.ts",
+        "./landing/landing.controller.ts",
+        "./ng1-sandbox/ng1-sandbox.route.ts",
+        "./services/logger.service.ts",
+        "./typings/globals/angular/index.d.ts",
+        "./typings/globals/toastr/index.d.ts",
         "./typings/index.d.ts"
     ],
     "atom": {
