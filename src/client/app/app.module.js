@@ -6,6 +6,7 @@ var app;
         'ngMaterial',
         'ngAria',
         'ngAnimate',
-        'ui.router'
+        'ui.router',
+        'ngMessages'
     ]);
 })(app || (app = {}));

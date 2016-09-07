@@ -26,6 +26,7 @@
     <!-- build:css css/app.css -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/src/client/css/layout.css">
+    <link rel="stylesheet" href="/src/client/css/ng1-sandbox.css">
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -39,7 +40,7 @@
 
 <body>
 
-        <div ui-view="shell"></div>
+        <div ui-view="shell" class="boxWithHeight" layout="column"></div>
 
         <!-- build:js js/lib.js -->
         <!-- bower:js -->
@@ -65,6 +66,8 @@
         <script src="/src/client/app/landing/landing.controller.js"></script>
         <script src="/src/client/app/ng1-sandbox/ng1-sandbox.route.js"></script>
         <script src="/src/client/app/services/logger.service.js"></script>
+        <script src="/src/client/app/ng1-sandbox/examples/ngmessages.controller.js"></script>
+        <script src="/src/client/app/ng1-sandbox/layout/ng1-sandbox.directive.js"></script>
         <!-- endinject -->
 
         <!-- inject:templates:js -->

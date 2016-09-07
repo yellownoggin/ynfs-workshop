@@ -1,10 +1,20 @@
-5.
+<!-- TODO:  colors.css -->
+
+7. ng messages
+    - using a template
+    - http://stackoverflow.com/questions/28678878/angularjs-ng-template-with-ng-messages-include
+6. using this example:
+http://codepen.io/team/AngularMaterial/pen/WvMeMQ
+- can dry up theboxWithHeight when all the way down the line
+
+5. angular loading more than once
+https://www.google.com/#q=WARNING%3A+Tried+to+load+angular+more+than+once.
 
 1. logger functionality
 - uses log service
 - Q: why use log service
     - http://stackoverflow.com/questions/24185847/why-use-angulars-log-instead-of-console-log
-    - downside  it doesn't show the file or line where the log comes from 
+    - downside  it doesn't show the file or line where the log comes from
 
 2. problem: controller instantiation with ui view
 - needs to be used with a ui you template in order for controller to the recognized

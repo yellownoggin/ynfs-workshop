@@ -1,0 +1,8 @@
+/* ng1-inbox shell */
+
+
+/* Important to set height for column layout */
+.boxWithHeight {
+  box-sizing: border-box;
+  height: 100%;
+}

@@ -1,0 +1,72 @@
+<div class="">
+
+<div layout="row" layout-align="center start">
+    <h1 flex="50" class="md-display-2">Ng Messages</h1>
+</div>
+<div class="" layout="column">
+<div md-whiteframe="1" style="padding: 12px;">
+        <div layout="row" layout-align="center center">
+            <div class="" flex="75">
+                <form ng-submit="mc.signUp()" name="loginForm" layout="column">
+                    <!-- fullName -->
+                    <md-input-container>
+                        <label>Full Name</label>
+                        <input name="fullName" type="text" ng-model="mc.fullName" minlength="2" required>
+                        <!-- name validation messages -->
+                        <ng-messages for="loginForm.fullName.$error">
+                            <ng-message when="required">Name is required.</ng-message>
+                            <ng-message when="minlength">Full name requires at least 2 characters.</ng-message>
+                        </ng-messages>
+                    </md-input-container>
+                    <!-- /fullName -->
+                    <!-- email -->
+                    <md-input-container>
+                        <label>Email</label>
+                        <input name="email" type="email" ng-model="mc.email" required>
+                        <!-- email messages-->
+                        <ng-messages for="loginForm.email.$error">
+                            <ng-message when="required">
+                                Email is required.
+                            </ng-message>
+                            <ng-message when="email">
+                                Needs to be a valid email.
+                            </ng-message>
+                        </ng-messages>
+                    </md-input-container>
+                    <!-- /email -->
+                    <!-- password -->
+                    <md-input-container>
+                        <label>Password</label>
+                        <input name="password" type="password" ng-model="mc.password" minlength="5" required>
+                        <!-- password messages -->
+                        <ng-messages for="loginForm.password.$error">
+                            <ng-message when="required">Password is required.</ng-message>
+                            <ng-message when="minlength">
+                                Password is needs to be at least 5 characters.
+                            </ng-message>
+                        </ng-messages>
+                    </md-input-container>
+                    <!-- /password -->
+                    <!-- <md-button class="md-raised md-primary" type="submit">Signup</md-button> -->
+                    <input class="md-button md-raised md-primary" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="height:35px;"></div>
+    <div md-whiteframe="1" style="padding: 12px;">
+        <div layout="column">
+            <div><span>Full Name: </span>{{mc.fullName}}</div>
+            <div><span>Email: </span>{{mc.email}}</div>
+            <div><span>Password: </span>{{mc.password}}</div>
+        </div>
+        <p>
+            {{loginForm.email}}
+            <p>
+                {{mc.fred}}
+            </p>
+        </p>
+    </div>
+</div>
+
+</div>
