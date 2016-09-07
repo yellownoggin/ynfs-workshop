@@ -1,5 +1,51 @@
 <!-- TODO:  colors.css -->
 
+9. splash page
+basic without spinner
+-  controller on the shell
++ showSplash binding
++ hideSplash() [timeout]
+- ng1-sandbox shell
++ ng-show directive
+- css
++ dissolve-animation
++ page-splash
+* styling (color*)
+* z-index
+* message css
+* NEEDS REVIEW
+
+with progress bar
+- used md-progress-linear directive
+- flex box to position
+- on top or in the page splash
+
+- NOTE: mixed in md flex box and the vanilla css
+
+
+
+
+
+8. Routing Issue * (needs a name)
+
+- used git new-development branch to save the old way of doing it
+- need to explain*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 7. ng messages
     - using a template
     - http://stackoverflow.com/questions/28678878/angularjs-ng-template-with-ng-messages-include

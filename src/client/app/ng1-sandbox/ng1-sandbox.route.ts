@@ -15,10 +15,11 @@ namespace ynfsworkshop {
 
         $stateProvider
             .state('ng1Sandbox', {
-
-                        abstract: true,
+                abstract: true,
                 views: {
                     shell: {
+                        controller: 'SandboxHomeController',
+                        controllerAs: 'sc',
                         templateUrl: 'app/ng1-sandbox/layout/ng1-sandbox-shell.html'
                     }
                 }

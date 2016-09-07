@@ -28,6 +28,7 @@
         "./ng1-sandbox/examples/ngmessages.controller.ts",
         "./ng1-sandbox/layout/ng1-sandbox.directive.ts",
         "./ng1-sandbox/ng1-sandbox.route.ts",
+        "./ng1-sandbox/sandboxHome/sandboxHome.controller.ts",
         "./services/logger.service.ts",
         "./typings/globals/angular/index.d.ts",
         "./typings/globals/toastr/index.d.ts",
