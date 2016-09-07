@@ -16,7 +16,7 @@ var ynfsworkshop;
             this.email = '';
             this.fullName = '';
             this.password = '';
-            this.state.go('ng1Sandbox.ngmessages.confirmation');
+            this.state.go('ng1Sandbox.ngmessagesConfirmation');
         }
     }
 })(ynfsworkshop || (ynfsworkshop = {}));
