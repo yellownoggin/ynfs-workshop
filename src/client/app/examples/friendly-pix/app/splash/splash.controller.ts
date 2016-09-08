@@ -6,7 +6,7 @@ namespace friendlyPix {
         .controller('SplashController', SplashController);
 
 
-    function SplashController($timeout, currentAuth, $firebaseAuth) {
+    function SplashController($timeout, currentAuth, $firebaseAuth, firebaseFpService) {
 
 
         this.title = 'Splash Controller';
@@ -15,7 +15,7 @@ namespace friendlyPix {
         this.$onInit = function() {
             console.log('vm.title');
             console.log(currentAuth, 'currentAuth');
-
+            vm.firebaseFpService = firebaseFpService;
             vm.signOut = $firebaseAuth().$signOut();
             vm.currentAuth = currentAuth;
             this.showSplash = true;
@@ -49,9 +49,11 @@ namespace friendlyPix {
         function signInWithGoogle() {
             console.log('google called');
             $firebaseAuth().$signInWithPopup('google').then((result) => {
-                console.log('google called')
+                vm.firebaseFpService.saveUserData(result.user.photoURL, result.user.displayName);
                 vm.hideSplash();
-            })
+            }).catch(function(error) {
+                console.error("Authentication failed:", error);
+            });
         }
 
 

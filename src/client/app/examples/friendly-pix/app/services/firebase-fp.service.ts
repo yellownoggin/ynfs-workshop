@@ -12,13 +12,13 @@ namespace friendlyPix {
         storage: any;
 
 
-        constructor(private $firebaseArray, private $q: ng.IQService, private Auth, private $firebaseObject) {
+        constructor(private $firebaseArray, private $q: ng.IQService, private $firebaseAuth, private $firebaseObject) {
             this.database = firebase.database();
-            this.auth = Auth;
+            this.auth = $firebaseAuth();
             this.user = this.auth.$getAuth();
             this.storage = firebase.storage();
 
-            console.log(this.Auth, 'this.auth');
+            console.log(this.auth, 'this.auth');
             console.log(this.user, 'this.auth getAuth');
         }
 

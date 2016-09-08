@@ -2,16 +2,16 @@ var friendlyPix;
 (function (friendlyPix) {
     'use strict';
     var firebaseFpService = (function () {
-        function firebaseFpService($firebaseArray, $q, Auth, $firebaseObject) {
+        function firebaseFpService($firebaseArray, $q, $firebaseAuth, $firebaseObject) {
             this.$firebaseArray = $firebaseArray;
             this.$q = $q;
-            this.Auth = Auth;
+            this.$firebaseAuth = $firebaseAuth;
             this.$firebaseObject = $firebaseObject;
             this.database = firebase.database();
-            this.auth = Auth;
+            this.auth = $firebaseAuth();
             this.user = this.auth.$getAuth();
             this.storage = firebase.storage();
-            console.log(this.Auth, 'this.auth');
+            console.log(this.auth, 'this.auth');
             console.log(this.user, 'this.auth getAuth');
         }
         firebaseFpService.prototype.saveUserData = function (imageUrl, displayName) {

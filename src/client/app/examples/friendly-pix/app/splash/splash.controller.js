@@ -4,12 +4,13 @@ var friendlyPix;
     angular
         .module('friendlyPix')
         .controller('SplashController', SplashController);
-    function SplashController($timeout, currentAuth, $firebaseAuth) {
+    function SplashController($timeout, currentAuth, $firebaseAuth, firebaseFpService) {
         this.title = 'Splash Controller';
         var vm = this;
         this.$onInit = function () {
             console.log('vm.title');
             console.log(currentAuth, 'currentAuth');
+            vm.firebaseFpService = firebaseFpService;
             vm.signOut = $firebaseAuth().$signOut();
             vm.currentAuth = currentAuth;
             this.showSplash = true;
@@ -33,8 +34,10 @@ var friendlyPix;
         function signInWithGoogle() {
             console.log('google called');
             $firebaseAuth().$signInWithPopup('google').then(function (result) {
-                console.log('google called');
+                vm.firebaseFpService.saveUserData(result.user.photoURL, result.user.displayName);
                 vm.hideSplash();
+            }).catch(function (error) {
+                console.error("Authentication failed:", error);
             });
         }
     }
