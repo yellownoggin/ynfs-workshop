@@ -3,8 +3,12 @@ var friendlyPix;
     'use strict';
     angular
         .module('friendlyPix')
-        .service('Auth', firebaseAuthorizationService);
-    function firebaseAuthorizationService($firebaseAuth) {
-        return $firebaseAuth();
+        .service('angularfireAuth', angularFireAuthFactory);
+    function angularFireAuthFactory($firebaseAuth) {
+        this.Auth = Auth;
+        this.googleSignIn = googleSignIn;
+        function Auth() {
+            return $firebaseAuth();
+        }
     }
 })(friendlyPix || (friendlyPix = {}));

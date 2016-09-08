@@ -3,9 +3,29 @@ namespace friendlyPix {
 
     angular
         .module('friendlyPix')
-        .service('Auth', firebaseAuthorizationService);
+        .service('angularfireAuth', angularFireAuthFactory);
 
-        function firebaseAuthorizationService($firebaseAuth) {
+
+
+    /**
+     * angularFireAuthFactory - service for
+     *
+     * @param  {type} $firebaseAuth description
+     * @returns {type}               description
+     */
+    function angularFireAuthFactory($firebaseAuth) {
+
+        this.Auth = Auth;
+        this.googleSignIn = googleSignIn;
+
+
+        // Service methods
+
+        function Auth() {
             return $firebaseAuth();
         }
+
+
+
+    }
 }

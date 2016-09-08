@@ -1,0 +1,72 @@
+<div layout="column" layout-fill>
+
+    <!-- splash page -->
+    <div id="splash-page" ng-show="hc.showSplash">
+        <div class="page-splash dissolve-animation" layout="row" layout-align="center center" >
+            <div class="splash-section" layout="column" flex="50">
+                <h1>Friendly Pix</h1>
+                <p>
+                    showSplash
+                </p>
+                <p>
+                    {{2+2}}
+                </p>
+                <p>
+                    The friendliest way to share your pics.
+                </p>
+
+
+                <div class="signed-out-only" layout="column">
+                    <div class="firebaseui-auth-container" ng-show="!hc.showLogin">
+                        <div class="" ng-show="!sc.isUser">
+                            <md-button class="md-raised" ng-click="hc.signInWithGoogle()">Sign In with Google</md-button>
+                        </div>
+                    </div>
+                    <p>
+                        <a class="fp-skip" ui-sref="profile({uid: sc.uid})">profile</a>
+                    </p>
+                    <p>
+                        <a class="fp-skip" ui-sref="feed">skip sign in</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <md-toolbar class="md-primary" layout="row">
+        <nav>
+            <ul class="main-nav-fp">
+                <li><a ui-sref="splash">Splash</a></li>
+                <li><a ui-sref="profile">Profile</a></li>
+                <!-- <li><a ui-sref="homeFeed">Home Feed</a></li>
+                <li><a ui-sref="allFeed">All Feed</a></li> -->
+            </ul>
+        </nav>
+        <span flex></span>
+        <div class="">
+            <md-button class="md-raise" ng-click="mc.signOut()">Sign out</md-button>
+            <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
+
+        </div>
+
+    </md-toolbar>
+    <!--Note: for scrollShrink to work, the toolbar must be a sibling of a md-content element, placed before it.-->
+    <md-content>
+        <p>
+            {{2+2}}
+        </p>
+        <p>
+            {{hc.showSplash}}
+        </p>
+
+        <div ui-view="content"></div>
+
+
+
+    </md-content>
+</div>

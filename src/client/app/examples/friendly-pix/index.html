@@ -14,7 +14,7 @@
 
     <!-- Firebase UI Auth -->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css" />
-    
+
     <!-- Styling -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,300">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amaranth:700">
@@ -28,37 +28,16 @@
 
 </head>
 
-<body layout="row" ng-controller="MainController as mc" ng-cloak>
-<div layout="column" layout-fill>
-    <md-toolbar class="md-primary" layout="row">
-        <nav>
-            <ul class="main-nav-fp">
-                <li><a ui-sref="splash">Splash</a></li>
-                <li><a ui-sref="profile">Profile</a></li>
-                <!-- <li><a ui-sref="homeFeed">Home Feed</a></li>
-                <li><a ui-sref="allFeed">All Feed</a></li> -->
-            </ul>
-        </nav>
-        <span flex></span>
-        <div class="">
-            <md-button class="md-raise" ng-click="mc.signOut()">Sign out</md-button>
-            <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
-
-        </div>
-
-    </md-toolbar>
-    <!--Note: for scrollShrink to work, the toolbar must be a sibling of a md-content element, placed before it.-->
-    <md-content>
-
-        <!-- <div ui-view="view1"></div> -->
-        <ui-view ng-cloak></ui-view>
-
-
-    </md-content>
-</div>
+<body ng-controller="MainController as mc" ng-cloak>
 
 
 
+
+    <div ui-view="shell" layout="row"></div>
+
+
+
+    <!-- scripts -->
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 
 
@@ -108,19 +87,20 @@
     <!-- /lib.js -->
 
     <!-- app.js -->
-    <script src="./js/app.module.js" charset="utf-8"></script>
-    <script src="./js/app.config.js" charset="utf-8"></script>
-    <script src="./js/app.routes.js" charset="utf-8"></script>
-    <script src="./js/splash/splash.controller.js"></script>
-    <script src="./js/main.controller.js"></script>
-    <script src="./js/authentication/authentication.config.js"></script>
-    <script src="./js/authentication/firebase-authentication.service.js"></script>
-    <script src="./js/profile/profile.controller.js"></script>
-    <script src="./js/services/firebase-fp.service.js"></script>
-    <script src="./js/profile/choose-file.directive.js"></script>
-    <script src="./js/upload.service.js"></script>
-    <script src="./js/add-picture/add-picture.controller.js"></script>
-    <!-- <script src="./js/authentication.controller.js"></script> -->
+    <script src="./app/core/app.module.js" charset="utf-8"></script>
+    <script src="./app/core/app.config.js" charset="utf-8"></script>
+    <script src="./app/core/app.routes.js" charset="utf-8"></script>
+    <script src="./app/home/home.controller.js"></script>
+    <script src="./app/splash/splash.controller.js"></script>
+    <script src="./app/core/main.controller.js"></script>
+    <script src="./app/authentication/authentication.config.js"></script>
+    <script src="./app/authentication/firebase-authentication.service.js"></script>
+    <script src="./app/profile/profile.controller.js"></script>
+    <script src="./app/services/firebase-fp.service.js"></script>
+    <script src="./app/profile/choose-file.directive.js"></script>
+    <script src="./app/services/upload.service.js"></script>
+    <script src="./app/add-picture/add-picture.controller.js"></script>
+    <!-- <script src="./app/authentication.controller.js"></script> -->
 
     <!-- /app.js -->
 </body>

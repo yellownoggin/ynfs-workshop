@@ -3,10 +3,15 @@ namespace friendlyPix {
 
     angular
         .module('friendlyPix')
-        .config(configApp);
+        .config(initTheme)
+        .config(initFirebaseApp);
 
-    //  TODO: configApp.inject
-     function configApp($mdThemingProvider) {
+    /**
+     * initTheme - description
+     * Sets the themes pallets
+     */
+    // @ngInject
+    function initTheme($mdThemingProvider) {
         $mdThemingProvider
             .theme('default')
             .primaryPalette('grey', {
@@ -16,7 +21,14 @@ namespace friendlyPix {
                 'hue-3': 'A100',
             })
             .accentPalette('cyan');
+    }
 
+    /**
+     * initFirebaseApp - description
+     * Initializes friendlyPix app with firebase
+     */
+     // @ngInject
+    function initFirebaseApp() {
         var config = {
             apiKey: "AIzaSyD0mr2QG78H_gP9Te-oUOR3UcRNVLBkuVM",
             authDomain: "friendly-pix-f2d0d.firebaseapp.com",
@@ -24,28 +36,21 @@ namespace friendlyPix {
             storageBucket: "friendly-pix-f2d0d.appspot.com",
         };
         firebase.initializeApp(config);
-
-        // $firebaseRefProvider.registerUrl({
-        //     default: config.databaseURL,
-        //     array: `${config.databaseURL}/todos`
-        // })
-
-
-        // TODO:  cannot find firebase ui
-        // FirebaseUI config.
-
-
-
-        // var uiConfig = {
-        //     'signInSuccessUrl': '/',
-        //     'signInOptions': [
-        //         firebase.auth.GoogleAuthProvider.PROVIDER_ID
-        //     ]
-        // };
-        // var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        // ui.start('#firebaseui-auth-container', uiConfig);
-
-
-
     }
+
+    // TODO:  cannot find firebase ui
+    // try again - remember toastr, etc with constant
+    // FirebaseUI config.
+    // var uiConfig = {
+    //     'signInSuccessUrl': '/',
+    //     'signInOptions': [
+    //         firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    //     ]
+    // };
+    // var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
+}
 }

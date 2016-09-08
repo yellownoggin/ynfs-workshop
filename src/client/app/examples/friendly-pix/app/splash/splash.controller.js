@@ -4,45 +4,37 @@ var friendlyPix;
     angular
         .module('friendlyPix')
         .controller('SplashController', SplashController);
-    function SplashController(currentAuth, Auth, $state, firebaseFpService) {
+    function SplashController($timeout, currentAuth, $firebaseAuth) {
         this.title = 'Splash Controller';
-        this.isUser = false;
+        var vm = this;
         this.$onInit = function () {
-            this.currentAuth = currentAuth;
-            this.Auth = Auth;
-            this.state = $state;
-            this.getCurrentAuth = getCurrentAuth;
-            this.showLogin = showLogin;
-            this.firebaseFpService = firebaseFpService;
-            this.getCurrentAuth();
-            this.showLogin(this.currentAuth);
-            this.signInWithGoogle = signInWithGoogle;
+            console.log('vm.title');
+            console.log(currentAuth, 'currentAuth');
+            vm.signOut = $firebaseAuth().$signOut();
+            vm.currentAuth = currentAuth;
+            this.showSplash = true;
+            vm.hideSplash = hideSplash;
+            vm.signInWithGoogle = signInWithGoogle;
+            ifAuthed();
         };
-        function getCurrentAuth() {
-            if (this.currentAuth) {
-                this.uid = this.currentAuth.uid;
-            }
-            else {
-                this.uid = '';
+        function ifAuthed() {
+            console.log(vm.currentAuth, 'current authorization');
+            if (vm.currentAuth) {
+                $timeout(function () {
+                    vm.hideSplash();
+                }, 1000);
             }
         }
-        function showLogin(userId) {
-            if (userId) {
-                this.isUser = true;
-                console.log(this.isUser, 'show login has been called true');
-            }
-            else {
-                this.isUser = false;
-                console.log(this.isUser, 'show login has been called false');
-            }
+        function hideSplash() {
+            $timeout(function () {
+                vm.showSplash = false;
+            }, 1000);
         }
         function signInWithGoogle() {
-            var that = this;
-            this.Auth.$signInWithPopup("google").then(function (result) {
-                that.firebaseFpService.saveUserData(result.user.photoURL, result.user.displayName);
-                that.state.go('profile');
-            }).catch(function (error) {
-                console.error("Authentication failed:", error);
+            console.log('google called');
+            $firebaseAuth().$signInWithPopup('google').then(function (result) {
+                console.log('google called');
+                vm.hideSplash();
             });
         }
     }

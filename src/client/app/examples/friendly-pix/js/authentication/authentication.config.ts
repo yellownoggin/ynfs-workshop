@@ -12,7 +12,7 @@ namespace friendlyPix {
             // and redirect the user back to the home page
 
             if (error === 'AUTH_REQUIRED') {
-                $state.go('splash');
+                $state.go('home');
             }
         });
     }

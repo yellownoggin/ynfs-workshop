@@ -1,5 +1,53 @@
 html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+
+/**
+ * splash page*
+ */
+
+#splash-page {
+    z-index: 99999 !important;
+}
+.page-splash {
+    z-index: 99999 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0288D1;
+    background: radial-gradient(circle, #039BE5, #01579b);
+    pointer-events: auto;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+
+.dissolve-animation.ng-hide-remove,
+.dissolve-animation.ng-hide-add {
+    position: fixed !important;
+    display: inline !important;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+    .dissolve-animation.ng-hide-remove.ng-hide-remove-active,
+    .dissolve-animation.ng-hide-add {
+        opacity: 1;
+    }
+
+        .dissolve-animation.ng-hide-add.ng-hide-add-active,
+        .dissolve-animation.ng-hide-remove {
+            opacity: 0;
 }
 
 /*dev nav toolbar*/
@@ -8,14 +56,14 @@ ul.main-nav-fp {
     list-style-type: none;
 }
 ul.main-nav-fp li {
-    display:inline-block;
+    display: inline-block;
 }
-
 .centered {
     text-align: center;
 }
 
 /*Development Stage*/
+
 .splash-section {
     text-align: center;
 }
@@ -23,21 +71,20 @@ ul.main-nav-fp li {
 /* Splash Page */
 
 #page-splash {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #0288D1;
-  background: radial-gradient(circle, #039BE5, #01579b);
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0288D1;
+    background: radial-gradient(circle, #039BE5, #01579b);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-direction: column;
 }
-
 #page-splash .fp-skip {
     font-weight: lighter;
     color: white;
@@ -48,18 +95,15 @@ ul.main-nav-fp li {
     text-decoration: none;
     cursor: pointer;
 }
-
 .fp-logo {
     font-family: 'Amaranth', sans-serif;
 }
-
 #page-splash .fp-caption {
     margin: 20px 0 40px 0;
     font-family: 'Amaranth', sans-serif;
     font-size: 18px;
     opacity: 0.8;
 }
-
 a {
     text-decoration: underline;
     color: #039BE5;
@@ -69,16 +113,18 @@ a {
     font-weight: 500;
 }
 
-
 /**
  * page-add
  */
 
+
 /*the row container*/
+
 #page-add .mdl-cell {
     width: auto;
     min-width: 300px;
 }
+
 /*.mdl-grid.mdl-grid--no-spacing {
     padding: 0;
 }*/
@@ -89,15 +135,18 @@ a {
     /*display: block;*/
     text-align: center;
 }
+
 /*don't forget overlay*/
 
 #newPictureContainer {
     margin: 0;
-max-width: 100%;
-max-height: 400px;
+    max-width: 100%;
+    max-height: 400px;
 }
 
 /*in firebase auth css*/
+
+
 /*.fp-addcontainer .mdl-card__supporting-text {
     padding-top: 0;
     width: auto;

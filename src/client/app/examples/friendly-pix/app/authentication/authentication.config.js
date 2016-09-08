@@ -7,7 +7,7 @@ var friendlyPix;
     function authRequired($rootScope, $state) {
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
             if (error === 'AUTH_REQUIRED') {
-                $state.go('splash');
+                $state.go('home');
             }
         });
     }

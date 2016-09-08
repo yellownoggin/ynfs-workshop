@@ -7,39 +7,30 @@ var friendlyPix;
     function initRouter($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise('/');
         $stateProvider
-            .state('splash', {
+            .state('home', {
             url: '/',
-            controller: 'SplashController',
-            controllerAs: 'sc',
-            templateUrl: 'partials/home.splash.html',
-            resolve: {
-                "currentAuth": ["Auth", function (Auth) {
-                        console.log(Auth.$waitForSignIn(), 'resolve wait for sign in');
-                        return Auth.$waitForSignIn();
-                    }]
+            abstract: true,
+            views: {
+                shell: {
+                    controller: 'SplashController',
+                    controllerAs: 'sc',
+                    templateUrl: 'app/layout/shell.html',
+                    resolve: {
+                        "currentAuth": ["$firebaseAuth", function ($firebaseAuth) {
+                                return $firebaseAuth().$waitForSignIn();
+                            }]
+                    }
+                }
             }
         })
-            .state('profile', {
-            url: '/profile/:uid',
-            controller: 'ProfileController',
-            controllerAs: 'pro',
-            templateUrl: 'partials/profile.html',
-            resolve: {
-                "currentAuth": ["Auth", function (Auth) {
-                        console.log(Auth.$requireSignIn(), 'resolve require simon');
-                        return Auth.$requireSignIn();
-                    }]
-            }
-        })
-            .state('addPicture', {
-            url: '/add-picture',
-            controller: 'AddPictureController',
-            controllerAs: 'ap',
-            templateUrl: 'partials/add-picture.html',
-            resolve: {
-                "currentAuth": ["Auth", function (Auth) {
-                        return Auth.$requireSignIn();
-                    }]
+            .state('home.feed', {
+            url: '',
+            views: {
+                content: {
+                    controller: 'HomeController',
+                    controllerAs: 'hc',
+                    templateUrl: 'app/splash/home.splash.html'
+                }
             }
         });
     }

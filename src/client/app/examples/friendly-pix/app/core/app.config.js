@@ -3,8 +3,9 @@ var friendlyPix;
     'use strict';
     angular
         .module('friendlyPix')
-        .config(configApp);
-    function configApp($mdThemingProvider) {
+        .config(initTheme)
+        .config(initFirebaseApp);
+    function initTheme($mdThemingProvider) {
         $mdThemingProvider
             .theme('default')
             .primaryPalette('grey', {
@@ -14,6 +15,8 @@ var friendlyPix;
             'hue-3': 'A100',
         })
             .accentPalette('cyan');
+    }
+    function initFirebaseApp() {
         var config = {
             apiKey: "AIzaSyD0mr2QG78H_gP9Te-oUOR3UcRNVLBkuVM",
             authDomain: "friendly-pix-f2d0d.firebaseapp.com",
