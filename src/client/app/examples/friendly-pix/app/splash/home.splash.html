@@ -1,34 +1,36 @@
+<section id="page-feed">
 
-<p>
-    home feed
-</p>
-
-<!-- <div id="splash-page" ng-show="sc.showSplash">
-<div layout="row" layout-align="center center" flex>
-    <div class="page-splash" ng-show="sc.showSplash" layout="column" flex="50">
-        <h1>Friendly Pix</h1>
-        <p>
-            The friendliest way to share your pics.
-        </p>
-
-        <div class="signed-out-only" layout="column">
-            <div class="firebaseui-auth-container">
-                <div class="" ng-show="!sc.isUser">
-                    <md-button class="md-raised" ng-click="sc.signInWithGoogle()">Sign In with Google</md-button>
-                </div>
+    <div class="site-width-1024">
+        <div layout="row" layout-align="center start" flex>
+            <div layout="column" flex="66">
+                <md-card ng-repeat="d in hc.data track by $index">
+                    <md-card-header>
+                        <md-card-avatar>
+                            <img class="md-user-avatar" ng-src="{{d.author.profile_picture}}" />
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">{{d.author.full_name}}</span>
+                            <span class="md-subhead">{{d.timestamp}}</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <img ng-src="{{d.full_url}}" class="md-card-image" alt="Washed Out">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{d.text}}</span>
+                            <span class="md-subhead">Reversed</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-button>Action 1</md-button>
+                    <md-button>Action 2</md-button>
+                    <md-card-icon-actions>
+                        <md-button class="md-icon-button" aria-label="toggle">
+                            <md-icon md-svg-icon="md-toggle-arrow"></md-icon>
+                        </md-button>
+                    </md-card-icon-actions>
+                    </md-card-actions>
+                </md-card>
             </div>
-            <p>
-                <a class="fp-skip" ui-sref="profile({uid: sc.uid})">profile</a>
-            </p>
-            <p>
-                <a class="fp-skip" ui-sref="feed">skip sign in</a>
-            </p>
-            <p>
-
-                {{sc.title}}
-            </p>
         </div>
-
     </div>
-</div>
-</div> -->
+
+</section>
