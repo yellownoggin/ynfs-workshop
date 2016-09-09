@@ -146,6 +146,12 @@ var friendlyPix;
                 return _this.$q.all(updateOperations);
             });
         };
+        firebaseFpService.prototype.getPosts = function () {
+            return this._getPaginatedFeed('/posts/', friendlyPix.firebaseFpService.POSTS_PAGE_SIZE);
+        };
+        firebaseFpService.prototype.subscribeToGeneralFeed = function (callback, latestPostId) {
+            return this._subscribeToFeed('/posts/', callback, latestPostId);
+        };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;
             if (earliestEntryId === void 0) { earliestEntryId = null; }

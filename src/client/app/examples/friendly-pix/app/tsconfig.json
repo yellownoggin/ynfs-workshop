@@ -28,6 +28,7 @@
         "./core/app.routes-nested.ts",
         "./core/app.routes.ts",
         "./core/main.controller.ts",
+        "./generalFeed/general-feed.controller.ts",
         "./home-old/home.controller.ts",
         "./home/home.controller.ts",
         "./profile/profile.controller.ts",

@@ -3,7 +3,7 @@ namespace friendlyPix {
 
     angular
         .module('friendlyPix')
-        .controller('HomeController', HomeController)
+        .controller('GeneralFeedController', GeneralFeedController)
 
 
     /**
@@ -12,7 +12,7 @@ namespace friendlyPix {
      * - splash page behavior and logic
      * - authorization & sending to users home feed
      */
-    function HomeController($timeout, $firebaseAuth, feedService) {
+    function GeneralFeedController($timeout, $firebaseAuth, feedService) {
 
         // TODO:
         // - show home feed(get home feed data)
@@ -23,11 +23,11 @@ namespace friendlyPix {
 
         this.$onInit = function() {
             var vm = this;
-            console.log('Home controller activated.');
+            console.log('General Feed controller activated.');
             this.user = $firebaseAuth().$getAuth();
             this.data = {};
             // console.log(authorization, 'authorization');
-            feedService.showHomeFeed().then(function (a) {
+            feedService.showGeneralFeed().then(function (a) {
                 vm.data = a;
             });
             this.newPostsButtonText  = feedService.newPostsButtonText;

@@ -185,24 +185,24 @@ namespace friendlyPix {
   * If needed the posts details can be fetched. This is useful for shallow post feeds.
   * @private
   */
- _subscribeToFeed(uri, callback, latestEntryId = null, fetchPostDetails = false) {
-   // Load all posts information.
-   let feedRef = this.database.ref(uri);
-   if (latestEntryId) {
-     feedRef = feedRef.orderByKey().startAt(latestEntryId);
-   }
-   feedRef.on('child_added', feedData => {
-     if (feedData.key !== latestEntryId) {
-       if (!fetchPostDetails) {
-         callback(feedData.key, feedData.val());
-       } else {
-         this.database.ref(`/posts/${feedData.key}`).once('value').then(
-             postData => callback(postData.key, postData.val()));
-       }
-     }
-   });
-   this.firebaseRefs.push(feedRef);
- }
+        _subscribeToFeed(uri, callback, latestEntryId = null, fetchPostDetails = false) {
+            // Load all posts information.
+            let feedRef = this.database.ref(uri);
+            if (latestEntryId) {
+                feedRef = feedRef.orderByKey().startAt(latestEntryId);
+            }
+            feedRef.on('child_added', feedData => {
+                if (feedData.key !== latestEntryId) {
+                    if (!fetchPostDetails) {
+                        callback(feedData.key, feedData.val());
+                    } else {
+                        this.database.ref(`/posts/${feedData.key}`).once('value').then(
+                            postData => callback(postData.key, postData.val()));
+                    }
+                }
+            });
+            this.firebaseRefs.push(feedRef);
+        }
 
 
 
@@ -258,6 +258,31 @@ namespace friendlyPix {
                 return this.$q.all(updateOperations);
             });
         }
+
+        /**
+   * Paginates posts from the global post feed.
+   *
+   * Fetches a page of `POSTS_PAGE_SIZE` posts from the global feed.
+   *
+   * We return a `Promise` which resolves with an Map of posts and a function to the next page or
+   * `null` if there is no next page.
+   */
+        getPosts() {
+            return this._getPaginatedFeed('/posts/', friendlyPix.firebaseFpService.POSTS_PAGE_SIZE);
+        }
+
+
+
+        /**
+         * Subscribes to receive updates to the general posts feed. The given `callback` function gets
+         * called for each new post to the general post feed.
+         *
+         * If provided we'll only listen to posts that were posted after `latestPostId`.
+         */
+        subscribeToGeneralFeed(callback, latestPostId) {
+            return this._subscribeToFeed('/posts/', callback, latestPostId);
+        }
+
 
         /**
       * Paginates entries from the given feed.

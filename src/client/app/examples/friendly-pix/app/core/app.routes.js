@@ -42,6 +42,16 @@ var friendlyPix;
                     templateUrl: 'partials/add-picture.html'
                 }
             }
+        })
+            .state('home.generalFeed', {
+            url: '/general-feed',
+            views: {
+                content: {
+                    controller: 'GeneralFeedController',
+                    controllerAs: 'gc',
+                    templateUrl: 'app/generalFeed/general-feed.html'
+                }
+            }
         });
     }
 })(friendlyPix || (friendlyPix = {}));

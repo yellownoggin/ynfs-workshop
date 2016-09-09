@@ -3,14 +3,14 @@ var friendlyPix;
     'use strict';
     angular
         .module('friendlyPix')
-        .controller('HomeController', HomeController);
-    function HomeController($timeout, $firebaseAuth, feedService) {
+        .controller('GeneralFeedController', GeneralFeedController);
+    function GeneralFeedController($timeout, $firebaseAuth, feedService) {
         this.$onInit = function () {
             var vm = this;
-            console.log('Home controller activated.');
+            console.log('General Feed controller activated.');
             this.user = $firebaseAuth().$getAuth();
             this.data = {};
-            feedService.showHomeFeed().then(function (a) {
+            feedService.showGeneralFeed().then(function (a) {
                 vm.data = a;
             });
             this.newPostsButtonText = feedService.newPostsButtonText;

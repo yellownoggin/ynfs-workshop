@@ -8,8 +8,12 @@ namespace friendlyPix {
     function feedService(firebaseFpService, $firebaseAuth, $q) {
 
         this.showHomeFeed = showHomeFeed;
+        this.showGeneralFeed = showGeneralFeed;
         this.user = $firebaseAuth().$getAuth();
-
+        this.newPosts = {};
+        this.newPostsButtonText = 'Display ${Object.keys(this.newPosts).length} new posts';
+        this.addNewPost = addNewPost;
+        // this.newPostsButtonShow = false;
         //////////// Service methods
 
 
@@ -24,12 +28,12 @@ namespace friendlyPix {
 
             if (this.user) {
                 // Make sure the home feed is updated with followed users's new posts.
-            return firebaseFpService.updateHomeFeeds().then(() => {
+                return firebaseFpService.updateHomeFeeds().then(() => {
 
                     var deferred = $q.defer();
 
                     // Load initial batch of posts.
-                return firebaseFpService.getHomeFeedPosts().then(data => {
+                    return firebaseFpService.getHomeFeedPosts().then(data => {
 
                         const postIds = Object.keys(data.entries);
                         if (postIds.length === 0) {
@@ -39,10 +43,10 @@ namespace friendlyPix {
                         }
                         // Listen for new posts.
                         const latestPostId = postIds[postIds.length - 1];
-                        // firebaseFpService.subscribeToHomeFeed(
-                        //     (postId, postValue) => {
-                        //         this.addNewPost(postId, postValue);
-                        //     }, latestPostId);
+                        firebaseFpService.subscribeToHomeFeed(
+                            (postId, postValue) => {
+                                this.addNewPost(postId, postValue);
+                            }, latestPostId);
 
                         // Adds fetched posts and next page button if necessary.
                         // this.addPosts(data.entries);
@@ -63,7 +67,7 @@ namespace friendlyPix {
                         // console.log(deferred, 'deferred');
                         // console.log(entries, 'below deferred');
 
-                        });
+                    });
 
 
 
@@ -81,6 +85,54 @@ namespace friendlyPix {
             // });
 
         }
+
+        /**
+       * Displays the general posts feed.
+       */
+        function showGeneralFeed() {
+            // Clear previously displayed posts if any.
+            // this.clear();
+
+            var deferred = $q.defer();
+
+
+            // Load initial batch of posts.
+            firebaseFpService.getPosts().then(data => {
+                // Listen for new posts.
+                const latestPostId = Object.keys(data.entries)[Object.keys(data.entries).length - 1];
+                firebaseFpService.subscribeToGeneralFeed(
+                    (postId, postValue) => this.addNewPost(postId, postValue), latestPostId);
+
+                // Adds fetched posts and next page button if necessary.
+                // this.addPosts(data.entries);
+                // this.toggleNextPageButton(data.nextPage);
+
+                deferred.resolve(data.entries)
+
+            });
+
+
+            return deferred.promise;
+            // Listen for posts deletions.
+            // firebaseFpService.registerForPostsDeletion(postId => this.onPostDeleted(postId));
+        }
+
+
+        /**
+     * Adds a new post to display in the queue.
+     */
+        function addNewPost(postId, postValue) {
+            this.newPosts[postId] = postValue;
+            this.newPostsButtonText = 'Display' + Object.keys(this.newPosts).length + 'new posts fred';
+            this.newPostsButtonShow = true;
+        }
+
+        // original with the j query stuff
+        // function addNewPost(postId, postValue) {
+        //     this.newPosts[postId] = postValue;
+        //     this.newPostsButton.text(`Display ${Object.keys(this.newPosts).length} new posts`);
+        //     this.newPostsButton.show();
+        // }
 
         /**
  * Appends the given list of `posts`.
