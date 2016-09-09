@@ -5,17 +5,16 @@ namespace friendlyPix {
         .module('friendlyPix')
         .controller('AddPictureController', AddPictureController);
 
-    function AddPictureController(uploadService, currentAuth, Auth, $rootScope, $scope, $q, firebaseFpService, $state) {
+    function AddPictureController(uploadService, $firebaseAuth, $rootScope, $scope, $q, firebaseFpService, $state) {
         this.title = 'AddPicture';
         this.$rootScope;
         this.$onInit = function() {
             this.uploadService = uploadService;
             // this.displayPicture = displayPicture;
-            this.auth = Auth;
-            this.user = this.auth.$getAuth();
+            this.user = $firebaseAuth().$getAuth();
             console.log(this.user, 'this user in add pic');
             this.state = $state;
-            this.currentAuth = currentAuth;
+            this.currentAuth = $firebaseAuth().$getAuth();
             this.uploadPic = uploadPic;
             this.generateImages = generateImages;
             this.addPolyfills = addPolyfills;
@@ -87,7 +86,7 @@ namespace friendlyPix {
                 // TODO Jamie: needs to be created
                 firebaseFpService.uploadNewPic(pics.full, pics.thumb, that.currentFile.name, imageCaption)
                     .then(postId => {
-                        this.state.go('profile');
+                        this.state.go('home.feed');
                         console.log('new pic has been posted');
                         // TODO Jamie: toast needs to be created
                         // page(`/user/${this.auth.currentUser.uid}`);

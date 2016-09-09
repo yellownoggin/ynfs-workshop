@@ -18,7 +18,8 @@
     ],
     "compileOnSave": true,
     "files": [
-        "./add-picture/add-picture.controller.ts",
+        "./addPicture/add-picture.controller.ts",
+        "./addPicture/choose-file.directive.ts",
         "./authentication/authentication.config.ts",
         "./authentication/authentication.controller.ts",
         "./authentication/firebase-authentication.service.ts",
@@ -29,7 +30,6 @@
         "./core/main.controller.ts",
         "./home-old/home.controller.ts",
         "./home/home.controller.ts",
-        "./profile/choose-file.directive.ts",
         "./profile/profile.controller.ts",
         "./services/feed.service.ts",
         "./services/firebase-demo.ts",

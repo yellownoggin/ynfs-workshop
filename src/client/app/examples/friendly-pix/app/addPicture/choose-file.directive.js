@@ -19,7 +19,7 @@ var friendlyPix;
                     scope.$apply(function () {
                         console.log(e.target.files, 'target files');
                         controller.readPicture(e);
-                        controller.state.go('addPicture');
+                        controller.state.go('home.addPicture');
                     });
                 });
             }

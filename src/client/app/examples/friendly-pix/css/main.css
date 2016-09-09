@@ -2,6 +2,21 @@ html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
+/*layout*/
+.site-width-1024 {
+    max-width: 1024px;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+    }
+
+
+
 /**
  * splash page*
  */

@@ -20,11 +20,12 @@ namespace friendlyPix {
             // vm.signOut = $firebaseAuth().$signOut();
             vm.auth = $firebaseAuth();
             vm.currentAuth = currentAuth;
-            vm.signOutAndShowSplash = signOutAndShowSplash
+            vm.signOutAndShowSplash = signOutAndShowSplash;
             // vm.signOut = $firebaseAuth().$signOut;
             this.showSplash = true;
             vm.hideSplash = hideSplash;
             vm.signInWithGoogle = signInWithGoogle;
+            // vm.signInWithGithub = signInWithGithub;
             vm.signInWithEmailAndPassword = signInWithEmailAndPassword;
             vm.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
             // onInit methods
@@ -62,6 +63,17 @@ namespace friendlyPix {
             });
         }
 
+        function signOutAndShowSplash() {
+            $firebaseAuth().$signOut();
+            vm.showSplash = true;
+        }
+
+        ////////// Restricting these methods  & functionality for now
+        // reason: e-mail & password sign-up scenario not sure how to handle profile information
+        // specifically saveUserData
+        // For github & twitter: the application needs to be using a public url
+
+
         function signInWithEmailAndPassword(email, password) {
             vm.auth.$signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
                 console.log("Signed in as:", firebaseUser.uid);
@@ -81,10 +93,17 @@ namespace friendlyPix {
 
         }
 
-        function signOutAndShowSplash() {
-            $firebaseAuth().$signOut();
-            vm.showSplash = true;
+
+        function signInWithGithub() {
+            $firebaseAuth().$signInWithPopup('github').then((result) => {
+                vm.firebaseFpService.saveUserData(result.user.photoURL, result.user.displayName);
+                vm.hideSplash();
+            }).catch(function(error) {
+                console.error("Authentication failed:", error);
+            });
         }
+
+
 
     }
 }

@@ -43,6 +43,10 @@ var friendlyPix;
                 console.error("Authentication failed:", error);
             });
         }
+        function signOutAndShowSplash() {
+            $firebaseAuth().$signOut();
+            vm.showSplash = true;
+        }
         function signInWithEmailAndPassword(email, password) {
             vm.auth.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
                 console.log("Signed in as:", firebaseUser.uid);
@@ -59,9 +63,13 @@ var friendlyPix;
                 console.error("Authentication failed:", error);
             });
         }
-        function signOutAndShowSplash() {
-            $firebaseAuth().$signOut();
-            vm.showSplash = true;
+        function signInWithGithub() {
+            $firebaseAuth().$signInWithPopup('github').then(function (result) {
+                vm.firebaseFpService.saveUserData(result.user.photoURL, result.user.displayName);
+                vm.hideSplash();
+            }).catch(function (error) {
+                console.error("Authentication failed:", error);
+            });
         }
     }
 })(friendlyPix || (friendlyPix = {}));

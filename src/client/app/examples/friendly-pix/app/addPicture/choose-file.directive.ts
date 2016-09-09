@@ -26,7 +26,7 @@ namespace friendlyPix {
                     scope.$apply(() => {
                         console.log(e.target.files, 'target files');
                         controller.readPicture(e);
-                        controller.state.go('addPicture');
+                        controller.state.go('home.addPicture');
                     });
                     // scope.$apply(() => {
                     //     var files = e.target.files;
@@ -61,7 +61,7 @@ namespace friendlyPix {
 
         function readPicture(e) {
             var that = this;
-            // clear stuff
+            // clear stuff TODO: code needed
 
             var file = e.target.files[0];
             that.currentFile = file;
@@ -107,6 +107,8 @@ namespace friendlyPix {
 
 } // namespace
 
+
+////////////////////friendly pics demo code 4 reference
         /**
          * Displays the given pic in the New Pic Upload dialog.
          */

@@ -4,16 +4,15 @@ var friendlyPix;
     angular
         .module('friendlyPix')
         .controller('AddPictureController', AddPictureController);
-    function AddPictureController(uploadService, currentAuth, Auth, $rootScope, $scope, $q, firebaseFpService, $state) {
+    function AddPictureController(uploadService, $firebaseAuth, $rootScope, $scope, $q, firebaseFpService, $state) {
         this.title = 'AddPicture';
         this.$rootScope;
         this.$onInit = function () {
             this.uploadService = uploadService;
-            this.auth = Auth;
-            this.user = this.auth.$getAuth();
+            this.user = $firebaseAuth().$getAuth();
             console.log(this.user, 'this user in add pic');
             this.state = $state;
-            this.currentAuth = currentAuth;
+            this.currentAuth = $firebaseAuth().$getAuth();
             this.uploadPic = uploadPic;
             this.generateImages = generateImages;
             this.addPolyfills = addPolyfills;
@@ -56,7 +55,7 @@ var friendlyPix;
                 console.log(pics.full, 'pics from generateImages');
                 firebaseFpService.uploadNewPic(pics.full, pics.thumb, that.currentFile.name, imageCaption)
                     .then(function (postId) {
-                    _this.state.go('profile');
+                    _this.state.go('home.feed');
                     console.log('new pic has been posted');
                 }, function (error) {
                     console.error(error);

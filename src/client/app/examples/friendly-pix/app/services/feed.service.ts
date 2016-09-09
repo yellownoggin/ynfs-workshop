@@ -39,10 +39,10 @@ namespace friendlyPix {
                         }
                         // Listen for new posts.
                         const latestPostId = postIds[postIds.length - 1];
-                        firebaseFpService.subscribeToHomeFeed(
-                            (postId, postValue) => {
-                                this.addNewPost(postId, postValue);
-                            }, latestPostId);
+                        // firebaseFpService.subscribeToHomeFeed(
+                        //     (postId, postValue) => {
+                        //         this.addNewPost(postId, postValue);
+                        //     }, latestPostId);
 
                         // Adds fetched posts and next page button if necessary.
                         // this.addPosts(data.entries);

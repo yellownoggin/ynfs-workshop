@@ -15,36 +15,11 @@
                         <div class="" ng-show="!sc.isUser">
                             <md-button class="md-raised" ng-click="sc.signInWithGoogle()">Sign In with Google</md-button>
                         </div>
-                        <div layout="row" layout-align="center start">
-
-                                <div class="" layout="column" ng-show="!sc.isUser">
-                                    <md-input-container>
-                                        <label>Email</label>
-                                        <input type="email" ng-model="sc.email">
-                                    </md-input-container>
-                                    <md-input-container>
-                                        <label>Password</label>
-                                        <input type="password" ng-model="sc.password">
-                                    </md-input-container>
-                                    <md-button class="md-raised" ng-click="sc.signInWithEmailAndPassword(sc.email, sc.password)">Sign In with Email</md-button>
-
-                            </div>
+                        <div class="" ng-show="!sc.isUser">
+                            <md-button class="md-raised" ng-click="sc.signInWithGithub()">Sign In with Github</md-button>
                         </div>
-                        <div layout="row" layout-align="center start">
 
-                                <div class="" layout="column" ng-show="!sc.isUser">
-                                    <md-input-container>
-                                        <label>Email</label>
-                                        <input type="email" ng-model="sc.email1">
-                                    </md-input-container>
-                                    <md-input-container>
-                                        <label>Password</label>
-                                        <input type="password" ng-model="sc.password1">
-                                    </md-input-container>
-                                    <md-button class="md-raised" ng-click="sc.createUserWithEmailAndPassword(sc.email1, sc.password1)">Sign Up with Email</md-button>
 
-                            </div>
-                        </div>
                     </div>
                     <p>
                         <a class="fp-skip" ui-sref="profile({uid: sc.uid})">profile</a>
@@ -60,25 +35,61 @@
 <!-- end splash -->
 
 <!-- shell body -->
-    <md-toolbar class="md-primary" layout="row">
-        <nav>
-            <ul class="main-nav-fp">
-                <li><a ui-sref="splash">Splash</a></li>
-                <li><a ui-sref="profile">Profile</a></li>
-                <!-- <li><a ui-sref="homeFeed">Home Feed</a></li>
-                <li><a ui-sref="allFeed">All Feed</a></li> -->
-            </ul>
-        </nav>
-        <span flex></span>
-        <div class="">
-            <md-button class="md-raise" ng-click="sc.signOutAndShowSplash()">Sign out</md-button>
-            <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
-
+<header>
+    <div class="site-width-1024">
+        <div layout="row">
+            <!-- logo -->
+            <h1 class="md-display-1">
+                Friendly Pix
+            </h1>
+            <span flex></span>
+            <div class="">
+                <md-button class="md-raise" ng-click="sc.signOutAndShowSplash()">Sign out</md-button>
+                <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
+            </div>
         </div>
+    </div>
+    <md-toolbar class="md-primary">
+        <div class="site-width-1024">
+            <div layout="row" class="full-width">
+            <div class="" flex>
+                <nav>
+                    <ul class="main-nav-fp">
+                        <li><a ui-sref="splash">Splash</a></li>
+                        <li><a ui-sref="profile">Profile</a></li>
+                        <!-- <li><a ui-sref="homeFeed">Home Feed</a></li>
+                        <li><a ui-sref="allFeed">All Feed</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+                <span flex></span>
+                <div class="">
+                    <!-- start of the pattern: name? -->
+                    <choose-file layout="row">
+                        <!-- 1:  -->
+                        <input id="fileInput" type="file" class="ng-hide">
+                        <!-- 2 -->
+                        <!-- <md-input-container>
+                            <label>Select your file</label>
+                            <input type="text" ng-model="pro.fileName" disabled>
+                        </md-input-container> -->
+                        <!-- 3 -->
+                        <div class="">
+                            <md-button id="uploadButton" class="md-fab md-mini">
+                                <md-icon class="material-icons">attach_file</md-icon>
+                            </md-button>
+                        </div>
+                    </choose-file>
 
+                </div>
+
+            </div>
+        </div>
     </md-toolbar>
+</header>
     <!--Note: for scrollShrink to work, the toolbar must be a sibling of a md-content element, placed before it.-->
     <md-content>
+
 
         <div ui-view="content"></div>
 

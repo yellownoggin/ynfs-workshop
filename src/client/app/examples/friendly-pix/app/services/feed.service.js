@@ -8,7 +8,6 @@ var friendlyPix;
         this.showHomeFeed = showHomeFeed;
         this.user = $firebaseAuth().$getAuth();
         function showHomeFeed() {
-            var _this = this;
             var entries = undefined;
             if (this.user) {
                 return firebaseFpService.updateHomeFeeds().then(function () {
@@ -19,9 +18,6 @@ var friendlyPix;
                             console.log('There are no posts.');
                         }
                         var latestPostId = postIds[postIds.length - 1];
-                        firebaseFpService.subscribeToHomeFeed(function (postId, postValue) {
-                            _this.addNewPost(postId, postValue);
-                        }, latestPostId);
                         entries = data.entries;
                         deferred.resolve(entries);
                         return deferred.promise;

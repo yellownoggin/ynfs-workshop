@@ -48,6 +48,16 @@ namespace friendlyPix {
                         templateUrl: 'app/splash/home.splash.html'
                     }
                 }
+            })
+            .state('home.addPicture', {
+                url: '/add-picture',
+                views: {
+                    content: {
+                        controller: 'AddPictureController',
+                        controllerAs: 'ap',
+                        templateUrl: 'partials/add-picture.html'
+                    }
+                }
             });
         // .state('profile', {
         //     url: '/profile/:uid',
