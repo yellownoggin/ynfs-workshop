@@ -14,6 +14,8 @@ var friendlyPix;
             _this.user = _this.firebaseAuth().$getAuth();
             _this.onFollowChange = userPageService.onFollowChange;
             _this.currentUserPageUid = $stateParams.uid;
+            _this.firebaseFpService = firebaseFpService;
+            _this.registerForPostsCount = registerForPostsCount;
             _this.canFollow = canFollow;
             _this.canFollow();
             userPageService.loadUser($stateParams.uid, _this.avatar, _this.name, _this.user.uid).then(function (data) {
@@ -21,7 +23,10 @@ var friendlyPix;
                 vm.profilePic = data.profile_picture;
                 vm.fullName = data.full_name;
             });
-            registerForPostsCount($stateParams.uid, function (nbPosts) { return _this.numberOfPosts = nbPosts; });
+            _this.registerForPostsCount($stateParams.uid, function (nbPosts) {
+                console.log(nbPosts, 'nbPosts');
+                _this.numberOfPosts = nbPosts;
+            });
         };
         function canFollow() {
             if (this.user.uid === this.currentUserPageUid) {
