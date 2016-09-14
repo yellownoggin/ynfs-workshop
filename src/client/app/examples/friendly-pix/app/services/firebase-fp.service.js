@@ -210,6 +210,11 @@ var friendlyPix;
             userPostsRef.on('value', function (data) { return postsCallback(data.numChildren()); });
             this.firebaseRefs.push(userPostsRef);
         };
+        firebaseFpService.prototype.registerForFollowers = function (uid, followersCallback) {
+            var followersRef = this.database.ref("/followers/" + uid);
+            followersRef.on('value', function (data) { return followersCallback(data.numChildren()); });
+            this.firebaseRefs.push(followersRef);
+        };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;
             if (earliestEntryId === void 0) { earliestEntryId = null; }
