@@ -401,13 +401,24 @@ namespace friendlyPix {
          * Listens to updates on the user's followers and calls the callback with user follower counts
          */
 
-        registerForFollowers(uid, followersCallback) {
+        registerForFollowersCount(uid, followersCallback) {
             const followersRef = this.database.ref(`/followers/${uid}`);
 
             followersRef.on('value', data => followersCallback(data.numChildren()));
 
             this.firebaseRefs.push(followersRef);
         }
+
+        registerForFollowingCount(uid, followingCallback) {
+             const followingRef = this.database.ref(`/people/${uid}/following/`);
+             followingRef.on('value', data => followingCallback(data.numChildren()));
+
+             this.firebaseRefs.push(followingRef);
+        }
+
+
+
+
         /**
       * Paginates entries from the given feed.
       *

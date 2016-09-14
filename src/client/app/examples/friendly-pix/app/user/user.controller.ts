@@ -18,8 +18,13 @@ namespace friendlyPix {
             this.onFollowChange = userPageService.onFollowChange;
             this.currentUserPageUid = $stateParams.uid;
             this.firebaseFpService = firebaseFpService;
+
+            // meta info
             this.registerForPostsCount = registerForPostsCount
             this.registerForFollowers = registerForFollowers;
+            this.registerForFollowing = registerForFollowing;
+
+
             this.canFollow = canFollow;
             this.canFollow();
 
@@ -36,6 +41,8 @@ namespace friendlyPix {
                 vm.fullName = data.full_name;
             });
 
+
+            // call meta methods
             this.registerForPostsCount($stateParams.uid,
                 nbPosts => {
                     console.log(nbPosts, 'nbPosts');
@@ -47,6 +54,14 @@ namespace friendlyPix {
                     console.log(nbFollowers, 'nbFollowers');
                     this.numberOfFollowers = nbFollowers;
                 });
+
+            this.registerForFollowing($stateParams.uid,
+                nbFollowing =>  {
+                    console.log(nbFollowing, 'nbFollowing');
+                    this.numberOfFollowing = nbFollowing;
+                }
+            )
+
 
     } // end onInit
 
@@ -64,7 +79,11 @@ namespace friendlyPix {
         }
 
         function registerForFollowers(uid, cb){
-            this.firebaseFpService.registerForFollowers(uid, cb);
+            this.firebaseFpService.registerForFollowersCount(uid, cb);
+        }
+
+        function registerForFollowing(uid, cb){
+            this.firebaseFpService.registerForFollowingCount(uid, cb);
         }
 
     } // controller

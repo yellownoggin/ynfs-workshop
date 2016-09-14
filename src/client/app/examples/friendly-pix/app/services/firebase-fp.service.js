@@ -210,10 +210,15 @@ var friendlyPix;
             userPostsRef.on('value', function (data) { return postsCallback(data.numChildren()); });
             this.firebaseRefs.push(userPostsRef);
         };
-        firebaseFpService.prototype.registerForFollowers = function (uid, followersCallback) {
+        firebaseFpService.prototype.registerForFollowersCount = function (uid, followersCallback) {
             var followersRef = this.database.ref("/followers/" + uid);
             followersRef.on('value', function (data) { return followersCallback(data.numChildren()); });
             this.firebaseRefs.push(followersRef);
+        };
+        firebaseFpService.prototype.registerForFollowingCount = function (uid, followingCallback) {
+            var followingRef = this.database.ref("/people/" + uid + "/following/");
+            followingRef.on('value', function (data) { return followingCallback(data.numChildren()); });
+            this.firebaseRefs.push(followingRef);
         };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;
