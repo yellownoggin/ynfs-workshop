@@ -43,8 +43,35 @@
                 Friendly Pix
             </h1>
             <span flex></span>
-            <div class="">
-                <md-button class="md-raise" ng-click="sc.signOutAndShowSplash()">Sign out</md-button>
+            <div class="" layout="row">
+                    <md-autocomplete md-search-text="sc.searchText" md-items="item in sc.searchUsers(sc.searchText, 10)" md-item-text="item._search_index.fullName" placeholder="Search for people to follow">
+
+
+                        <!-- Todo: need to show the profile pic properly - currently shows the whole tag.  -->
+                            <!-- 1. taking out the md-highlight-text out made it work
+                            2. need to beautify. circle and align and size
+                            the template used in the arch.js
+                            <a class="fp-searchResultItem fp-usernamelink mdl-button mdl-js-button" href="/user/${peopleId}">
+            <div class="fp-avatar"style="background-image: url(${peopleProfile.profile_picture ||
+                '/images/silhouette.jpg'})"></div>
+            <div class="fp-username mdl-color-textblack">${peopleProfile.full_name}</div>
+        </a>    -->
+
+
+                      <md-item-template>
+
+                          <a ui-sref="home.user({uid: item.uid})">
+                          <span><img ng-src="{{item.profile_picture}}"  width="25px" alt="" /></span>
+                           <span md-highlight-text="">{{item._search_index.fullName}}</span>
+                           </a>
+                      </md-item-template>
+                      <md-not-found>
+                          No Matches Found.
+                      </md-not-found>
+                    </md-autocomplete>
+                    <span><md-icon class="material-icons">search</md-icon></span>
+
+                <md-button ng-click="sc.signOutAndShowSplash()">Sign out</md-button>
                 <!-- <a ui-sref="friendly.user({uid: vm.userId})">My Profile Page</a> -->
             </div>
         </div>

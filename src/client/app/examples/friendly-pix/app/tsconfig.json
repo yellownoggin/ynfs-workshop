@@ -39,7 +39,9 @@
         "./splash-old/splash.controller.ts",
         "./splash/splash.controller-old.ts",
         "./splash/splash.controller.ts",
-        "./typings/index.d.ts"
+        "./typings/index.d.ts",
+        "./user/user.controller.ts",
+        "./user/userPage.ts"
     ],
     "atom": {
         "rewriteTsconfig": true

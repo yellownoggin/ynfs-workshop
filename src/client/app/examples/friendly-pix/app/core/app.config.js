@@ -4,7 +4,8 @@ var friendlyPix;
     angular
         .module('friendlyPix')
         .config(initTheme)
-        .config(initFirebaseApp);
+        .config(initFirebaseApp)
+        .constant('latinize', latinize);
     function initTheme($mdThemingProvider) {
         $mdThemingProvider
             .theme('default')

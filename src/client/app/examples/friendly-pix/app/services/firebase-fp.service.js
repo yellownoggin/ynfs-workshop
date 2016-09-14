@@ -2,17 +2,16 @@ var friendlyPix;
 (function (friendlyPix) {
     'use strict';
     var firebaseFpService = (function () {
-        function firebaseFpService($firebaseArray, $q, $firebaseAuth, $firebaseObject) {
+        function firebaseFpService($firebaseArray, $q, $firebaseAuth, $firebaseObject, latinize) {
             this.$firebaseArray = $firebaseArray;
             this.$q = $q;
             this.$firebaseAuth = $firebaseAuth;
             this.$firebaseObject = $firebaseObject;
+            this.latinize = latinize;
             this.database = firebase.database();
             this.auth = $firebaseAuth();
             this.user = $firebaseAuth().$getAuth();
             this.storage = firebase.storage();
-            console.log(this.auth, 'this.auth');
-            console.log(this.user, 'this.auth getAuthuid');
             this.firebaseRefs = [];
             this.auth.$onAuthStateChanged(function (firebaseUser) {
                 if (firebaseUser) {
@@ -41,7 +40,7 @@ var friendlyPix;
             return this.database.ref("people/" + user.uid).update(updateData);
         };
         firebaseFpService.prototype.loadUserProfile = function (uid) {
-            return firebase.database().ref().child('people').child(uid);
+            return this.database.ref("/people/" + uid).once('value');
         };
         firebaseFpService.prototype.uploadNewPic = function (pic, thumb, fileName, text) {
             var _this = this;
@@ -151,6 +150,43 @@ var friendlyPix;
         };
         firebaseFpService.prototype.subscribeToGeneralFeed = function (callback, latestPostId) {
             return this._subscribeToFeed('/posts/', callback, latestPostId);
+        };
+        firebaseFpService.prototype.searchUsers = function (searchString, maxResults) {
+            var deferredNames = this.$q.defer();
+            var deferredUids = this.$q.defer();
+            searchString = this.latinize(searchString).toLowerCase();
+            var query = this.database.ref('/people')
+                .orderByChild('_search_index/fullName').startAt(searchString)
+                .limitToFirst(maxResults).once('value');
+            var reversedQuery = this.database.ref('/people')
+                .orderByChild('_search_index/reversed_full_name').startAt(searchString)
+                .limitToFirst(maxResults).once('value');
+            this.$q.all([query, reversedQuery]).then(function (results) {
+                console.log(results, 'results');
+                var people = {};
+                results.forEach(function (result) { return result.forEach(function (data) {
+                    people[data.key] = data.val();
+                }); });
+                var userIds = Object.keys(people);
+                userIds.forEach(function (userId) {
+                    var name = people[userId]._search_index.fullName;
+                    console.log(name, 'name');
+                    var reversedName = people[userId]._search_index.reversed_full_name;
+                    if (!name.startsWith(searchString) && !reversedName.startsWith(searchString)) {
+                        delete people[userId];
+                    }
+                });
+                var peopleIds = Object.keys(people);
+                peopleIds.forEach(function (peopleId) {
+                    people[peopleId].uid = peopleId;
+                });
+                var profile = [];
+                peopleIds.forEach(function (peopleId) {
+                    profile.push(people[peopleId]);
+                });
+                deferredNames.resolve(profile);
+            });
+            return deferredNames.promise;
         };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;

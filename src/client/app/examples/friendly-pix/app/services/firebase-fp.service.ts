@@ -13,15 +13,11 @@ namespace friendlyPix {
         firebaseRefs: any;
 
 
-        constructor(private $firebaseArray, private $q: ng.IQService, private $firebaseAuth, private $firebaseObject) {
+        constructor(private $firebaseArray, private $q: ng.IQService, private $firebaseAuth, private $firebaseObject, private latinize) {
             this.database = firebase.database();
             this.auth = $firebaseAuth();
             this.user = $firebaseAuth().$getAuth();
             this.storage = firebase.storage();
-
-            console.log(this.auth, 'this.auth');
-            console.log(this.user, 'this.auth getAuthuid');
-
 
             // Firebase references that are listened to.
             this.firebaseRefs = [];
@@ -84,7 +80,7 @@ namespace friendlyPix {
           * Load a single user profile information
           */
         loadUserProfile(uid) {
-            return firebase.database().ref().child('people').child(uid);
+            return this.database.ref(`/people/${uid}`).once('value');
 
         }
 
@@ -281,6 +277,77 @@ namespace friendlyPix {
          */
         subscribeToGeneralFeed(callback, latestPostId) {
             return this._subscribeToFeed('/posts/', callback, latestPostId);
+        }
+
+        /**
+          * Returns the users which name match the given search query as a Promise.
+          */
+        searchUsers(searchString, maxResults) {
+            var deferredNames = this.$q.defer();
+            var deferredUids = this.$q.defer();
+
+            searchString = this.latinize(searchString).toLowerCase();
+            // console.log(searchString, 'searchString');
+
+            const query = this.database.ref('/people')
+                .orderByChild('_search_index/fullName').startAt(searchString)
+                .limitToFirst(maxResults).once('value');
+
+            const reversedQuery = this.database.ref('/people')
+                .orderByChild('_search_index/reversed_full_name').startAt(searchString)
+                .limitToFirst(maxResults).once('value');
+
+
+
+            this.$q.all([query, reversedQuery]).then(results => {
+                console.log(results, 'results');
+                const people = {};
+
+                // construct people from the two search queries results.
+                results.forEach(result => result.forEach(data => {
+                    people[data.key] = data.val();
+                }));
+
+                // console.log(people, 'people');
+                // Remove results that do not start with the search query.
+                const userIds = Object.keys(people);
+
+                userIds.forEach(userId => {
+                    const name = people[userId]._search_index.fullName;
+                    console.log(name, 'name');
+                    const reversedName = people[userId]._search_index.reversed_full_name;
+                    if (!name.startsWith(searchString) && !reversedName.startsWith(searchString)) {
+                        delete people[userId];
+                    }
+                });
+
+                // Add uid's in its own property.
+                // For the link /user/{uid} to go to profile page
+                var peopleIds = Object.keys(people);
+                peopleIds.forEach(peopleId => {
+                    people[peopleId].uid = peopleId;
+                });
+
+                // For the display need to return an array for repreat.
+                var profile = [];
+                peopleIds.forEach((peopleId) => {
+                    profile.push(people[peopleId]);
+                });
+
+                deferredNames.resolve(profile);
+
+            });
+
+            return deferredNames.promise;
+
+            // return this.$q.all([deferredNames.promise, deferredUids.promise]).then((results) => {
+            //     console.log(results, 'results');
+            //     return [results[0], results[1]];
+            //     // return {
+            //     //     names: results[0],
+            //     //     uids: results[1]
+            //     // };
+            // });
         }
 
 

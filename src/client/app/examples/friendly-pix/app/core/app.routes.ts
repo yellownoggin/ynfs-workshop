@@ -68,19 +68,27 @@ namespace friendlyPix {
                         templateUrl: 'app/generalFeed/general-feed.html'
                     }
                 }
+            })
+            .state('home.user', {
+                url: '/user/:uid',
+                views: {
+                    content: {
+                        controller: 'UserController',
+                        controllerAs: 'uc',
+                        templateUrl: 'app/user/user.html'
+                    }
+                }
+
+                // controller: 'ProfileController',
+                // controllerAs: 'pro',
+                // templateUrl: 'partials/profile.html',
+                // resolve: {
+                //     "currentAuth": ["Auth", function(Auth) {
+                //         console.log(Auth.$requireSignIn(), 'resolve require simon');
+                //         return Auth.$requireSignIn();
+                //     }]
+                // }
             });
-        // .state('profile', {
-        //     url: '/profile/:uid',
-        //     controller: 'ProfileController',
-        //     controllerAs: 'pro',
-        //     templateUrl: 'partials/profile.html',
-        //     resolve: {
-        //         "currentAuth": ["Auth", function(Auth) {
-        //             console.log(Auth.$requireSignIn(), 'resolve require simon');
-        //             return Auth.$requireSignIn();
-        //         }]
-        //     }
-        // })
         // .state('addPicture', {
         //     url: '/add-picture',
         //     controller: 'AddPictureController',

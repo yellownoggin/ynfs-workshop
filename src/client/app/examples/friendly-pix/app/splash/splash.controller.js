@@ -4,13 +4,13 @@ var friendlyPix;
     angular
         .module('friendlyPix')
         .controller('SplashController', SplashController);
-    function SplashController($timeout, currentAuth, $firebaseAuth, firebaseFpService) {
+    function SplashController($timeout, currentAuth, $firebaseAuth, firebaseFpService, $q) {
         this.title = 'Splash Controller';
         var vm = this;
         this.$onInit = function () {
-            console.log('vm.title');
-            console.log(currentAuth, 'currentAuth');
+            this.$q = $q;
             vm.firebaseFpService = firebaseFpService;
+            this.searchUsers = searchUsers;
             vm.auth = $firebaseAuth();
             vm.currentAuth = currentAuth;
             vm.signOutAndShowSplash = signOutAndShowSplash;
@@ -46,6 +46,14 @@ var friendlyPix;
         function signOutAndShowSplash() {
             $firebaseAuth().$signOut();
             vm.showSplash = true;
+        }
+        function searchUsers(name, max) {
+            var deferred = this.$q.defer();
+            firebaseFpService.searchUsers(name, max).then(function (data) {
+                console.log(data);
+                deferred.resolve(data);
+            });
+            return deferred.promise;
         }
         function signInWithEmailAndPassword(email, password) {
             vm.auth.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {

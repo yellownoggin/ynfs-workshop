@@ -52,6 +52,16 @@ var friendlyPix;
                     templateUrl: 'app/generalFeed/general-feed.html'
                 }
             }
+        })
+            .state('home.user', {
+            url: '/user/:uid',
+            views: {
+                content: {
+                    controller: 'UserController',
+                    controllerAs: 'uc',
+                    templateUrl: 'app/user/user.html'
+                }
+            }
         });
     }
 })(friendlyPix || (friendlyPix = {}));

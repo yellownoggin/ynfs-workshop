@@ -6,17 +6,27 @@ namespace friendlyPix {
         .controller('SplashController', SplashController);
 
 
-    function SplashController($timeout, currentAuth, $firebaseAuth, firebaseFpService) {
+    function SplashController($timeout, currentAuth, $firebaseAuth, firebaseFpService, $q ) {
         // TODO: login container needs to hide and show
         // - change this to shell controller
+        // - the searchUsers does it need the wrapper?
+        // + tried to do it but getting latinize error
 
         this.title = 'Splash Controller';
 
         var vm = this;
         this.$onInit = function() {
-            console.log('vm.title');
-            console.log(currentAuth, 'currentAuth');
+
+
+            // search users
+            this.$q = $q;
             vm.firebaseFpService = firebaseFpService;
+            this.searchUsers = searchUsers;
+            // this.searchUsers1 = firebaseFpService.searchUsers;
+
+            // console.log(this.searchUsers, 'search users');
+            // / search users
+
             // vm.signOut = $firebaseAuth().$signOut();
             vm.auth = $firebaseAuth();
             vm.currentAuth = currentAuth;
@@ -29,6 +39,10 @@ namespace friendlyPix {
             vm.signInWithEmailAndPassword = signInWithEmailAndPassword;
             vm.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
             // onInit methods
+
+
+
+
 
             ifAuthed();
         }
@@ -66,6 +80,16 @@ namespace friendlyPix {
         function signOutAndShowSplash() {
             $firebaseAuth().$signOut();
             vm.showSplash = true;
+        }
+
+
+        function searchUsers(name, max) {
+            var deferred = this.$q.defer();
+            firebaseFpService.searchUsers(name, max).then((data) => {
+                console.log(data);
+                deferred.resolve(data);
+            });
+            return deferred.promise;
         }
 
         ////////// Restricting these methods  & functionality for now
