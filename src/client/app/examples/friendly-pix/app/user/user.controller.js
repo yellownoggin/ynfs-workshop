@@ -18,6 +18,7 @@ var friendlyPix;
             _this.registerForPostsCount = registerForPostsCount;
             _this.registerForFollowers = registerForFollowers;
             _this.registerForFollowing = registerForFollowing;
+            _this.showUsersFollowed = false;
             _this.canFollow = canFollow;
             _this.canFollow();
             userPageService.loadUser($stateParams.uid, _this.avatar, _this.name, _this.user.uid).then(function (data) {
@@ -26,16 +27,26 @@ var friendlyPix;
                 vm.fullName = data.full_name;
             });
             _this.registerForPostsCount($stateParams.uid, function (nbPosts) {
-                console.log(nbPosts, 'nbPosts');
                 _this.numberOfPosts = nbPosts;
             });
             _this.registerForFollowers($stateParams.uid, function (nbFollowers) {
-                console.log(nbFollowers, 'nbFollowers');
                 _this.numberOfFollowers = nbFollowers;
             });
             _this.registerForFollowing($stateParams.uid, function (nbFollowing) {
-                console.log(nbFollowing, 'nbFollowing');
                 _this.numberOfFollowing = nbFollowing;
+            });
+            _this.firebaseFpService.getFollowingProfiles($stateParams.uid).then(function (profiles) {
+                _this.usersFollowedInfo = {};
+                _this.usersFollowedArray = [];
+                Object.keys(profiles).forEach(function (uid) {
+                    var userInfoObj = {
+                        uid: uid,
+                        profilePic: profiles[uid].profile_picture,
+                        fullName: profiles[uid]._search_index.fullName
+                    };
+                    _this.usersFollowedArray.push(userInfoObj);
+                });
+                console.log(_this.usersFollowedArray, 'usersFollowedArray');
             });
         };
         function canFollow() {

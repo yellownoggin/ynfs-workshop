@@ -1,8 +1,5 @@
-<div layout="column">
-    <div layout="row" class="user-meta">
-
-    </div>
-    <div layout="row" class="user-posts">
+<div layout="row">
+    <div>
         <div class=""><img ng-src="{{uc.profilePic}}" alt=""></div>
     </div>
     <span flex="15"></span>
@@ -24,9 +21,19 @@
                 <span> followers</span>
             </div>
             <div class="number-of-following">
-                <span>{{uc.numberOfFollowing}}</span>
-                <span> following</span>
+                <a ng-click="uc.showUsersFollowed  = !uc.showUsersFollowed">
+                    <span>{{uc.numberOfFollowing}}</span>
+                    <span> following</span>
+                </a>
             </div>
         </div>
+    </div>
+</div>
+<div layout="row" ng-show="uc.showUsersFollowed" layout-wrap>
+    <div ng-repeat="f in uc.usersFollowedArray">
+        <a ui-sref="home.user({uid: f.uid})">
+            <img ng-src="{{f.profilePic}}" width="25px" alt="" />
+            <span>{{f.fullName}}</span>
+        </a>
     </div>
 </div>

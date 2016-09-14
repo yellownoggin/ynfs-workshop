@@ -23,7 +23,7 @@ namespace friendlyPix {
             this.registerForPostsCount = registerForPostsCount
             this.registerForFollowers = registerForFollowers;
             this.registerForFollowing = registerForFollowing;
-
+            this.showUsersFollowed  = false;
 
             this.canFollow = canFollow;
             this.canFollow();
@@ -45,22 +45,39 @@ namespace friendlyPix {
             // call meta methods
             this.registerForPostsCount($stateParams.uid,
                 nbPosts => {
-                    console.log(nbPosts, 'nbPosts');
+
                     this.numberOfPosts = nbPosts
                 });
 
             this.registerForFollowers($stateParams.uid,
                 nbFollowers => {
-                    console.log(nbFollowers, 'nbFollowers');
+
                     this.numberOfFollowers = nbFollowers;
                 });
 
             this.registerForFollowing($stateParams.uid,
                 nbFollowing =>  {
-                    console.log(nbFollowing, 'nbFollowing');
+
                     this.numberOfFollowing = nbFollowing;
-                }
-            )
+                });
+
+
+            this.firebaseFpService.getFollowingProfiles($stateParams.uid).then(profiles => {
+                this.usersFollowedInfo = {};
+                this.usersFollowedArray = [];
+
+                 Object.keys(profiles).forEach(uid => {
+                     var userInfoObj = {
+                         uid: uid,
+                         profilePic: profiles[uid].profile_picture,
+                         fullName: profiles[uid]._search_index.fullName
+                     };
+
+                     this.usersFollowedArray.push(userInfoObj);
+
+                 });
+                console.log(this.usersFollowedArray, 'usersFollowedArray');
+            });
 
 
     } // end onInit
@@ -85,6 +102,8 @@ namespace friendlyPix {
         function registerForFollowing(uid, cb){
             this.firebaseFpService.registerForFollowingCount(uid, cb);
         }
+
+
 
     } // controller
 

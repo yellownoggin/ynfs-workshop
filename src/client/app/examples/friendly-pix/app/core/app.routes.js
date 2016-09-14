@@ -34,7 +34,7 @@ var friendlyPix;
             }
         })
             .state('home.addPicture', {
-            url: '/add-picture',
+            url: 'add-picture',
             views: {
                 content: {
                     controller: 'AddPictureController',
@@ -44,7 +44,7 @@ var friendlyPix;
             }
         })
             .state('home.generalFeed', {
-            url: '/general-feed',
+            url: 'general-feed',
             views: {
                 content: {
                     controller: 'GeneralFeedController',
@@ -54,7 +54,7 @@ var friendlyPix;
             }
         })
             .state('home.user', {
-            url: '/user/:uid',
+            url: 'user/:uid',
             views: {
                 content: {
                     controller: 'UserController',

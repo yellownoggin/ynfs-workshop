@@ -220,6 +220,25 @@ var friendlyPix;
             followingRef.on('value', function (data) { return followingCallback(data.numChildren()); });
             this.firebaseRefs.push(followingRef);
         };
+        firebaseFpService.prototype.getFollowingProfiles = function (uid) {
+            var _this = this;
+            return this.database.ref("/people/" + uid + "/following/").once('value').then(function (data) {
+                if (data.val()) {
+                    var followingUids = Object.keys(data.val());
+                    var fetchProfileDetailsOperations = followingUids.map(function (followingUid) { return _this.loadUserProfile(followingUid); });
+                    return _this.$q.all(fetchProfileDetailsOperations).then(function (results) {
+                        var profiles = {};
+                        results.forEach(function (result) {
+                            if (result.val()) {
+                                profiles[result.key] = result.val();
+                            }
+                        });
+                        return profiles;
+                    });
+                }
+                return {};
+            });
+        };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;
             if (earliestEntryId === void 0) { earliestEntryId = null; }

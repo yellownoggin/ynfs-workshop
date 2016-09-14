@@ -396,11 +396,11 @@ namespace friendlyPix {
             this.firebaseRefs.push(userPostsRef);
         }
 
-
-        /**
-         * Listens to updates on the user's followers and calls the callback with user follower counts
-         */
-
+        /*
+           * Listens to updates on the followers of a person and calls the callback with followers counts.
+           * TODO: This won't scale if a user has a huge amount of followers. We need to keep track of a
+           *       follower count instead.
+           */
         registerForFollowersCount(uid, followersCallback) {
             const followersRef = this.database.ref(`/followers/${uid}`);
 
@@ -409,11 +409,46 @@ namespace friendlyPix {
             this.firebaseRefs.push(followersRef);
         }
 
+        /**
+          * Listens to updates on the followed people of a person and calls the callback with its count.
+          */
         registerForFollowingCount(uid, followingCallback) {
-             const followingRef = this.database.ref(`/people/${uid}/following/`);
-             followingRef.on('value', data => followingCallback(data.numChildren()));
+            const followingRef = this.database.ref(`/people/${uid}/following/`);
+            followingRef.on('value', data => followingCallback(data.numChildren()))
+            this.firebaseRefs.push(followingRef);
+        }
 
-             this.firebaseRefs.push(followingRef);
+        /**
+ * Fetch the list of followed people's profile.
+ * TODO: what is the difference between on('value', cb) & once('value').then...
+ */
+        getFollowingProfiles(uid) {
+            // reference of uid that your following
+            // got the snapshot
+            // stor
+            return this.database.ref(`/people/${uid}/following/`).once('value').then(data => {
+                if (data.val()) {
+                    const followingUids = Object.keys(data.val());
+
+                    const fetchProfileDetailsOperations = followingUids.map((followingUid) => this.loadUserProfile(followingUid));
+
+
+                    return this.$q.all(fetchProfileDetailsOperations).then(results => {
+
+                        const profiles = {};
+                        results.forEach(result => {
+                            if (result.val()) {
+                                profiles[result.key] = result.val();
+                            }
+
+
+                        });
+                        return profiles;
+                    });
+                }
+                return {};
+            });
+
         }
 
 
