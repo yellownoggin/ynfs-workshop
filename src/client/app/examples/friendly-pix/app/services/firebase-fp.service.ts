@@ -244,7 +244,7 @@ namespace friendlyPix {
                         }
                         Object.keys(postData.val()).forEach(postId => {
                             if (postId !== lastSyncedPostId) {
-                                updates[`/feed/${this.auth.user.uid}/${postId}`] = true;
+                                updates[`/feed/${this.user.uid}/${postId}`] = true;
                                 updates[`/people/${this.user.uid}/following/${followedUid}`] = postId;
                             }
                         });
@@ -349,6 +349,53 @@ namespace friendlyPix {
             //     // };
             // });
         }
+
+
+        /**
+   * Follow/Unfollow a user and return a promise once that's done.
+   *
+   * If the user is now followed we'll add all his posts to the home feed of the follower.
+   * If the user is now not followed anymore all his posts are removed from the follower home feed.
+   */
+   // TODO: why is there is a return
+  toggleFollowUser(followedUserId, follow) {
+    // Add or remove posts to the user's home feed.
+    // Get followed users posts
+    return this.database.ref(`/people/${followedUserId}/posts`).once('value').then(
+        data => {
+          const updateData = {};
+          let lastPostId = true;
+
+          console.log(follow, 'follow inside toggle follow user');
+        // TODO: how does it see this.user.uid inside promise
+
+          // Add followed user's posts to the home feed.
+          data.forEach(post => {
+            updateData[`/feed/${this.user.uid}/${post.key}`] = follow ? !!follow : null;
+            lastPostId = post.key;
+          });
+
+          // Add followed user to the 'following' list.
+          updateData[`/people/${this.user.uid}/following/${followedUserId}`] =
+              follow ? lastPostId : null;
+
+          // Add signed-in suer to the list of followers.
+          updateData[`/followers/${followedUserId}/${this.user.uid}`] =
+              follow ? !!follow : null;
+          return this.database.ref().update(updateData);
+        });
+  }
+
+
+  /**
+    * Listens to updates on the user's posts and calls the callback with user posts counts.
+    */
+   registerForPostsCount(uid, postsCallback) {
+     const userPostsRef = this.database.ref(`/people/${uid}/posts`);
+     userPostsRef.on('value', data => postsCallback(data.numChildren()));
+     this.firebaseRefs.push(userPostsRef);
+   }
+
 
 
         /**

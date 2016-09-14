@@ -135,7 +135,7 @@ var friendlyPix;
                         }
                         Object.keys(postData.val()).forEach(function (postId) {
                             if (postId !== lastSyncedPostId) {
-                                updates[("/feed/" + _this.auth.user.uid + "/" + postId)] = true;
+                                updates[("/feed/" + _this.user.uid + "/" + postId)] = true;
                                 updates[("/people/" + _this.user.uid + "/following/" + followedUid)] = postId;
                             }
                         });
@@ -187,6 +187,28 @@ var friendlyPix;
                 deferredNames.resolve(profile);
             });
             return deferredNames.promise;
+        };
+        firebaseFpService.prototype.toggleFollowUser = function (followedUserId, follow) {
+            var _this = this;
+            return this.database.ref("/people/" + followedUserId + "/posts").once('value').then(function (data) {
+                var updateData = {};
+                var lastPostId = true;
+                console.log(follow, 'follow inside toggle follow user');
+                data.forEach(function (post) {
+                    updateData[("/feed/" + _this.user.uid + "/" + post.key)] = follow ? !!follow : null;
+                    lastPostId = post.key;
+                });
+                updateData[("/people/" + _this.user.uid + "/following/" + followedUserId)] =
+                    follow ? lastPostId : null;
+                updateData[("/followers/" + followedUserId + "/" + _this.user.uid)] =
+                    follow ? !!follow : null;
+                return _this.database.ref().update(updateData);
+            });
+        };
+        firebaseFpService.prototype.registerForPostsCount = function (uid, postsCallback) {
+            var userPostsRef = this.database.ref("/people/" + uid + "/posts");
+            userPostsRef.on('value', function (data) { return postsCallback(data.numChildren()); });
+            this.firebaseRefs.push(userPostsRef);
         };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;

@@ -8,13 +8,20 @@
     <span flex="15"></span>
     <div class="">
         <h1>{{uc.fullName}}</h1>
-        <div class="follow-user-action">
-            <!-- <md-switch ng-model="" aria-label="">
+        <div class="follow-user-action" ng-show="uc.showFollowContainer">
+            <md-switch ng-model="uc.model" ng-change="uc.onFollowChange(uc.model, uc.currentUserPageUid)">
                 Follow
-            </md-switch> -->
+            </md-switch>
+
         </div>
         <div class="user-meta">
             user meta here
+            <p>
+                uc.numberOfPosts
+            </p>
+                        <p>
+                            {{uc.numberOfPosts}}
+                        </p>
         </div>
     </div>
 </div>
