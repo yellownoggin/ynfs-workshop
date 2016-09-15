@@ -17,6 +17,24 @@ html, body {
 
 
 
+
+/**
+ * user feed ( old profile page)
+ */
+
+/*.user-feed-post-image {
+     max-height: 150px;
+     background-size: cover;
+     background-position: 50% 50%;
+     display: flex;
+     justify-content: flex-end;
+}*/
+.user-feed-post-image {
+     height: 150px;
+     background-size: cover;
+      background-position: 50% 50%;
+}
+
 /**
  * splash page*
  */

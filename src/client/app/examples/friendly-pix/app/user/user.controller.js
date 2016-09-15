@@ -48,6 +48,19 @@ var friendlyPix;
                 });
                 console.log(_this.usersFollowedArray, 'usersFollowedArray');
             });
+            _this.firebaseFpService.getUserFeedPosts($stateParams.uid).then(function (data) {
+                var userFeedPostsArray = [];
+                var postsIds = Object.keys(data.entries);
+                postsIds.forEach(function (postId) {
+                    var userFeedPosts = {
+                        postId: postId,
+                        thumbUrl: data.entries[postId].thumb_url,
+                        text: data.entries[postId].text
+                    };
+                    userFeedPostsArray.push(userFeedPosts);
+                });
+                _this.userFeedPostsArray = userFeedPostsArray;
+            });
         };
         function canFollow() {
             if (this.user.uid === this.currentUserPageUid) {

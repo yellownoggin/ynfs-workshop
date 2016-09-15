@@ -239,6 +239,9 @@ var friendlyPix;
                 return {};
             });
         };
+        firebaseFpService.prototype.getUserFeedPosts = function (uid) {
+            return this._getPaginatedFeed("/people/" + uid + "/posts", firebaseFpService.USER_PAGE_POSTS_PAGE_SIZE, null, true);
+        };
         firebaseFpService.prototype._getPaginatedFeed = function (uri, pageSize, earliestEntryId, fetchPostDetails) {
             var _this = this;
             if (earliestEntryId === void 0) { earliestEntryId = null; }
@@ -287,6 +290,7 @@ var friendlyPix;
             return this.database.ref(uri + "/" + postId).remove();
         };
         firebaseFpService.POSTS_PAGE_SIZE = 5;
+        firebaseFpService.USER_PAGE_POSTS_PAGE_SIZE = 6;
         return firebaseFpService;
     }());
     friendlyPix.firebaseFpService = firebaseFpService;

@@ -62,6 +62,16 @@ var friendlyPix;
                     templateUrl: 'app/user/user.html'
                 }
             }
+        })
+            .state('home.posts', {
+            url: 'posts/:postId',
+            views: {
+                content: {
+                    controller: 'UserController',
+                    controllerAs: 'uc',
+                    templateUrl: 'app/user/user.html'
+                }
+            }
         });
     }
 })(friendlyPix || (friendlyPix = {}));

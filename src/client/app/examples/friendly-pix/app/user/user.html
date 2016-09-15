@@ -1,39 +1,67 @@
-<div layout="row">
-    <div>
-        <div class=""><img ng-src="{{uc.profilePic}}" alt=""></div>
-    </div>
-    <span flex="15"></span>
-    <div class="">
-        <h1>{{uc.fullName}}</h1>
-        <div class="follow-user-action" ng-show="uc.showFollowContainer">
-            <md-switch ng-model="uc.model" ng-change="uc.onFollowChange(uc.model, uc.currentUserPageUid)">
-                Follow
-            </md-switch>
+<!-- TODO: 1.  professionalize the layout
+2. overlay
+3. md-white frame
+4. posts spacing sub layout -->
 
+<div layout="row" layout-align="center start">
+    <div layout="column" flex="80">
+        <div layout="row">
+            <div>
+                <div class=""><img ng-src="{{uc.profilePic}}" alt=""></div>
+            </div>
+            <span flex="15"></span>
+            <div class="">
+                <h1>{{uc.fullName}}</h1>
+                <div class="follow-user-action" ng-show="uc.showFollowContainer">
+                    <md-switch ng-model="uc.model" ng-change="uc.onFollowChange(uc.model, uc.currentUserPageUid)">
+                        Follow
+                    </md-switch>
+
+                </div>
+                <div class="user-meta">
+                    <div class="number-of-posts">
+                        <span>{{uc.numberOfPosts}}</span>
+                        <span> posts</span>
+                    </div>
+                    <div class="number-of-followers">
+                        <span>{{uc.numberOfFollowers}}</span>
+                        <span> followers</span>
+                    </div>
+                    <div class="number-of-following">
+                        <a ng-click="uc.showUsersFollowed  = !uc.showUsersFollowed">
+                            <span>{{uc.numberOfFollowing}}</span>
+                            <span> following</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="user-meta">
-            <div class="number-of-posts">
-                <span>{{uc.numberOfPosts}}</span>
-                <span> posts</span>
-            </div>
-            <div class="number-of-followers">
-                <span>{{uc.numberOfFollowers}}</span>
-                <span> followers</span>
-            </div>
-            <div class="number-of-following">
-                <a ng-click="uc.showUsersFollowed  = !uc.showUsersFollowed">
-                    <span>{{uc.numberOfFollowing}}</span>
-                    <span> following</span>
+        <div layout="row" ng-show="uc.showUsersFollowed" layout-wrap>
+            <div ng-repeat="f in uc.usersFollowedArray">
+                <a ui-sref="home.user({uid: f.uid})">
+                    <img ng-src="{{f.profilePic}}" width="25px" alt="" />
+                    <span>{{f.fullName}}</span>
                 </a>
             </div>
         </div>
-    </div>
-</div>
-<div layout="row" ng-show="uc.showUsersFollowed" layout-wrap>
-    <div ng-repeat="f in uc.usersFollowedArray">
-        <a ui-sref="home.user({uid: f.uid})">
-            <img ng-src="{{f.profilePic}}" width="25px" alt="" />
-            <span>{{f.fullName}}</span>
-        </a>
+        <div layout="row" layout-wrap>
+            <div ng-repeat="post in uc.userFeedPostsArray track by $index" flex="auto">
+                <a ui-sref="home.post({postId: post.postId})">
+                      <!--  <div class="fp-overlay">
+                         <i class="material-icons">favorite</i><span class="likes">0</span>
+                          <i class="material-icons">mode_comment</i><span class="comments">0</span>
+                          <div class="fp-pic-text">${text}</div>
+                      </div> -->
+                      <!-- 2d -->
+                      <div class="">
+                          {{post.text}}
+                      </div>
+                      <div class="user-feed-post-image" ng-style="{'background-image':'url({{post.thumbUrl}})'}">
+                      </div>
+
+                  </a>
+            </div>
+        </div>
+
     </div>
 </div>

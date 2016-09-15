@@ -41,6 +41,11 @@ namespace friendlyPix {
          */
         static POSTS_PAGE_SIZE = 5;
 
+        /**
+         * Number of posts loaded initially and per page for the User Profile page.
+         * @return {number}
+         */
+        static  USER_PAGE_POSTS_PAGE_SIZE = 6;
 
 
 
@@ -451,6 +456,18 @@ namespace friendlyPix {
 
         }
 
+        /**
+         * Paginates posts from the user's posts feed.
+         *
+         * Fetches a page of `USER_PAGE_POSTS_PAGE_SIZE` posts from the user's posts feed.
+         *
+         * We return a `Promise` which resolves with an Map of posts and a function to the next page or
+         * `null` if there is no next page.
+         */
+        getUserFeedPosts(uid) {
+          return this._getPaginatedFeed(`/people/${uid}/posts`,
+              firebaseFpService.USER_PAGE_POSTS_PAGE_SIZE, null, true);
+        } 
 
 
 

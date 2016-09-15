@@ -80,6 +80,23 @@ namespace friendlyPix {
             });
 
 
+            this.firebaseFpService.getUserFeedPosts($stateParams.uid).then(data => {
+                var userFeedPostsArray = [];
+                var postsIds = Object.keys(data.entries);
+
+                postsIds.forEach(postId => {
+                    var userFeedPosts =  {
+                        postId: postId,
+                        thumbUrl: data.entries[postId].thumb_url,
+                        text: data.entries[postId].text
+                    };
+
+                    userFeedPostsArray.push(userFeedPosts);
+                })
+                this.userFeedPostsArray = userFeedPostsArray;
+            }
+        );
+
     } // end onInit
 
 

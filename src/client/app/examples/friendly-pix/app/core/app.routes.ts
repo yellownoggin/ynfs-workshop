@@ -88,18 +88,19 @@ namespace friendlyPix {
                 //         return Auth.$requireSignIn();
                 //     }]
                 // }
+            })
+            .state('home.posts', {
+                url: 'posts/:postId',
+                views: {
+                    content: {
+                        controller: 'UserController',
+                        controllerAs: 'uc',
+                        templateUrl: 'app/user/user.html'
+                    }
+                }
+
             });
-        // .state('addPicture', {
-        //     url: '/add-picture',
-        //     controller: 'AddPictureController',
-        //     controllerAs: 'ap',
-        //     templateUrl: 'partials/add-picture.html',
-        //     resolve: {
-        //         "currentAuth": ["Auth", function(Auth) {
-        //             return Auth.$requireSignIn();
-        //         }]
-        //     }
-        // });
+
 
 
 
