@@ -1,8 +1,4 @@
-<!-- TODO: 1.  professionalize the layout
-2. overlay
-3. md-white frame
-4. posts spacing sub layout -->
-
+<!-- TODO: see trello --> 
 <div layout="row" layout-align="center start">
     <div layout="column" flex="80">
         <div layout="row">
@@ -45,22 +41,24 @@
             </div>
         </div>
         <div layout="row" layout-wrap>
-            <div ng-repeat="post in uc.userFeedPostsArray track by $index" flex="auto">
-                <a ui-sref="home.post({postId: post.postId})">
+            <a ui-sref="home.posts({postId: post.postId})" ng-repeat="post in uc.userFeedPostsArray track by $index">
+            <div flex>
+
                       <!--  <div class="fp-overlay">
                          <i class="material-icons">favorite</i><span class="likes">0</span>
                           <i class="material-icons">mode_comment</i><span class="comments">0</span>
                           <div class="fp-pic-text">${text}</div>
                       </div> -->
                       <!-- 2d -->
+
+                      <div class="user-feed-post-image" ng-style="{'background-image':'url({{post.thumbUrl}})'}">
+                      </div>
                       <div class="">
                           {{post.text}}
                       </div>
-                      <div class="user-feed-post-image" ng-style="{'background-image':'url({{post.thumbUrl}})'}">
-                      </div>
 
-                  </a>
             </div>
+            </a>
         </div>
 
     </div>

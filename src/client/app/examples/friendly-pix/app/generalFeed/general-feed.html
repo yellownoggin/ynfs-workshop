@@ -1,7 +1,7 @@
 <section id="page-feed">
-<div class="">
-    <!-- {{hc.newPostsButtonText}} -->
-</div>
+    <div class="">
+        <!-- {{hc.newPostsButtonText}} -->
+    </div>
     <div class="site-width-1024">
         <div layout="row" layout-align="center start" flex>
             <div layout="column" flex="66">
@@ -10,13 +10,30 @@
                         <md-card-avatar>
                             <img class="md-user-avatar" ng-src="{{d.author.profile_picture}}" />
                         </md-card-avatar>
-                        <md-card-header-text>
+                        <md-card-header-text layout="row">
                             <span class="md-title">{{d.author.full_name}}</span>
+                            <span flex></span>
                             <span class="md-subhead">{{d.timestamp}}</span>
                         </md-card-header-text>
                     </md-card-header>
-                    <img ng-src="{{d.full_url}}" class="md-card-image" alt="Washed Out">
-                    <md-card-title>
+                    <md-card-content>
+                        <img ng-src="{{d.full_url}}" class="md-card-image" alt="Washed Out">
+                        <div class="fp-likes"></div>
+                        <div class="fp-first-comment"></div>
+                        <div class="fp-more-comments"></div>
+                        <md-card-actions layout="row">
+                            <md-card-icon-actions flex="10">Like</md-card-icon-actions>
+                            <form class="" ng-submit="" flex="90">
+                                <md-input-container>
+                                    <label>Comments</label>
+                                    <input type="text" ng-model="gc.newComment">
+                                </md-input-container>
+                            </form>
+                        </md-card-actions>
+
+                    </md-card-content>
+
+                    <!-- <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">{{d.text}}</span>
                             <span class="md-subhead">Reversed</span>
@@ -28,8 +45,8 @@
                         <md-button class="md-icon-button" aria-label="toggle">
                             <md-icon md-svg-icon="md-toggle-arrow"></md-icon>
                         </md-button>
-                    </md-card-icon-actions>
-                    </md-card-actions>
+                    </md-card-icon-actions> -->
+
                 </md-card>
             </div>
         </div>

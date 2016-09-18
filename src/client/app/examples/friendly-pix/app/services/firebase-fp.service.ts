@@ -454,7 +454,7 @@ namespace friendlyPix {
                 return {};
             });
 
-        }
+        }  
 
         /**
          * Paginates posts from the user's posts feed.
@@ -467,7 +467,7 @@ namespace friendlyPix {
         getUserFeedPosts(uid) {
           return this._getPaginatedFeed(`/people/${uid}/posts`,
               firebaseFpService.USER_PAGE_POSTS_PAGE_SIZE, null, true);
-        } 
+        }
 
 
 
