@@ -116,7 +116,10 @@ var friendlyPix;
         firebaseFpService.prototype.updateHomeFeeds = function () {
             var _this = this;
             var followingRef = this.database.ref("/people/" + this.user.uid + "/following");
+            console.log(followingRef, 'followingRef');
             return followingRef.once('value', function (followingData) {
+                console.log(followingData, 'followingData');
+                console.log(followingData.val(), 'followingData val');
                 var following = followingData.val();
                 if (!following) {
                     console.log('You are following nobody');
@@ -124,6 +127,8 @@ var friendlyPix;
                 }
                 var updateOperations = Object.keys(following).map(function (followedUid) {
                     var followedUserPostsRef = _this.database.ref("/people/" + followedUid + "/posts");
+                    console.log(followedUserPostsRef, 'followedUserPostsRef ');
+                    console.log(following[followedUid], 'following[followedUid]');
                     var lastSyncedPostId = following[followedUid];
                     if (lastSyncedPostId instanceof String) {
                         followedUserPostsRef = followedUserPostsRef.orderByKey().startAt(lastSyncedPostId);
@@ -142,6 +147,7 @@ var friendlyPix;
                         return _this.database.ref().update(updates);
                     });
                 });
+                console.log(updateOperations);
                 return _this.$q.all(updateOperations);
             });
         };

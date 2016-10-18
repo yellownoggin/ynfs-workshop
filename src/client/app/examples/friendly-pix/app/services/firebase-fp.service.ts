@@ -229,7 +229,10 @@ namespace friendlyPix {
         updateHomeFeeds() {
             // Make sure we listen on each followed people's posts.
             const followingRef = this.database.ref(`/people/${this.user.uid}/following`);
+            console.log(followingRef, 'followingRef');
             return followingRef.once('value', followingData => {
+                console.log(followingData, 'followingData');
+                console.log(followingData.val(), 'followingData val');
                 // Start listening the followed user's posts to populate the home feed.
                 const following = followingData.val();
                 if (!following) {
@@ -238,7 +241,10 @@ namespace friendlyPix {
                 }
                 const updateOperations = Object.keys(following).map(followedUid => {
                     let followedUserPostsRef = this.database.ref(`/people/${followedUid}/posts`);
+                    console.log(followedUserPostsRef, 'followedUserPostsRef ');
+                    console.log(following[followedUid], 'following[followedUid]')
                     const lastSyncedPostId = following[followedUid];
+
                     if (lastSyncedPostId instanceof String) {
                         followedUserPostsRef = followedUserPostsRef.orderByKey().startAt(lastSyncedPostId);
                     }
@@ -256,6 +262,7 @@ namespace friendlyPix {
                         return this.database.ref().update(updates);
                     });
                 });
+                console.log(updateOperations);
                 return this.$q.all(updateOperations);
             });
         }
@@ -454,7 +461,7 @@ namespace friendlyPix {
                 return {};
             });
 
-        }  
+        }
 
         /**
          * Paginates posts from the user's posts feed.
